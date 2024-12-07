@@ -3,19 +3,34 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --primary: #22c55e;
+  --primary-hover: #16a34a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.emerald {
+  --background: #001414;
+  --foreground: #e6ffff;
+  --primary: #00B2A9;
+  --primary-hover: #005B5C;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-primary {
+    color: var(--primary);
+  }
+  
+  .bg-primary {
+    background-color: var(--primary);
+  }
+  
+  .hover:bg-primary-hover:hover {
+    background-color: var(--primary-hover);
+  }
 }
