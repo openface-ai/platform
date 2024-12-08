@@ -113,9 +113,9 @@ export default function ModelsPage() {
       setSearchQuery(e.target.value);
     }, []);
   
-    const handleSort = useCallback((value: string) => {
-      setSortBy(value as SortOption);
-    }, []);
+    // const handleSort = useCallback((value: string) => {
+    //   setSortBy(value as SortOption);
+    // }, []);
   return (
     <Layout>
       <div className="flex min-h-screen flex-col">

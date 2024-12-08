@@ -3,7 +3,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { AuthCard } from './AuthCard';
 import { LockIcon } from 'lucide-react';
 
@@ -28,8 +27,6 @@ export default function ResetPassword() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       router.push('/signin');
-    } catch (err) {
-      setError('Something went wrong. Please try again.');
     } finally {
       setIsLoading(false);
     }

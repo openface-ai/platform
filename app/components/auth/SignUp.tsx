@@ -13,7 +13,6 @@ export default function SignUp() {
     password: ''
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setError] = useState("");
 
 //   const handleSubmit = async (e: React.FormEvent) => {
 //     e.preventDefault();
@@ -38,9 +37,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       
       // Redirect to profile setup instead of dashboard
       router.push('/profile-setup');
-    } catch (err) {
-      setError('Something went wrong. Please try again.');
-    } finally {
+    }  finally {
       setIsLoading(false);
     }
   };
@@ -102,7 +99,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           </form>
 
           <div className="mt-6 text-center text-xs text-gray-500">
-            By clicking "Next" you agree to our{' '}
+            By clicking (&ldquo;Next&rdquo;) you agree to our{' '}
             <Link href="/terms" className="text-blue-500 hover:text-blue-400">
               Terms of Service
             </Link>{' '}

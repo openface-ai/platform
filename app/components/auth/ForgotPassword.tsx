@@ -2,13 +2,12 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { AuthCard } from './AuthCard';
 import { MailIcon, ArrowLeftIcon } from 'lucide-react';
 
 export default function ForgotPassword() {
-  const router = useRouter();
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);

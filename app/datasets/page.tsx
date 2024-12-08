@@ -2,13 +2,13 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { SearchIcon, SlidersHorizontalIcon } from 'lucide-react';
-import { DatasetFilters } from '../components/search/Filters';
 import { Card } from '../components/shared/Card';
 import { useUrlState } from '../utils/urlState';
 import type { DatasetSortOption, DatasetFilterState } from '../utils/type';
 import { mockDatasets } from '../data/datasets';
 import LoadingSpinner from '../components/shared/LoadingSpinner';
 import Layout from '../components/layout/Layout';
+import { DatasetFilters } from '../components/search/Filters';
 
 const SORT_OPTIONS: DatasetSortOption[] = [
   'Trending',

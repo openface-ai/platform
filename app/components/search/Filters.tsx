@@ -5,15 +5,19 @@ import { useState } from 'react';
 import { Search } from 'lucide-react';
 import { FilterState } from '@/app/utils/type';
 
-interface DatasetFiltersProps {
-  filters: {
+
+
+interface FiltersType {
     modalities: string[];
     formats: string[];
     size: number[];
-  };
-  onChange: (filters: any) => void;
-}
-
+  }
+  
+  interface DatasetFiltersProps {
+    filters: FiltersType;
+    onChange: (filters: FiltersType) => void;
+  }
+  
 const MODALITIES = [
   { id: '3d', label: '3D' },
   { id: 'audio', label: 'Audio' },
@@ -32,23 +36,23 @@ const FORMATS = [
   { id: 'soundfolder', label: 'Sound Folder' }
 ];
 
-const SIZE_MARKS = {
-  0: '0',
-  25: '1K',
-  50: '10K',
-  75: '100K',
-  100: '1M+'
-};
+// const SIZE_MARKS = {
+//   0: '0',
+//   25: '1K',
+//   50: '10K',
+//   75: '100K',
+//   100: '1M+'
+// };
 
-const sizeToValue = (size: number): number => {
-  if (size === 0) return 0;
-  return Math.log10(size) * 10;
-};
+// const sizeToValue = (size: number): number => {
+//   if (size === 0) return 0;
+//   return Math.log10(size) * 10;
+// };
 
-const valueToSize = (value: number): number => {
-  if (value === 0) return 0;
-  return Math.pow(10, value / 10);
-};
+// const valueToSize = (value: number): number => {
+//   if (value === 0) return 0;
+//   return Math.pow(10, value / 10);
+// };
 
 export function DatasetFilters({ filters, onChange }: DatasetFiltersProps) {
   const [filterSearch, setFilterSearch] = useState('');
@@ -69,12 +73,12 @@ export function DatasetFilters({ filters, onChange }: DatasetFiltersProps) {
     onChange({ ...filters, formats: newFormats });
   };
 
-  const handleSizeChange = (value: number[]) => {
-    onChange({
-      ...filters,
-      size: [valueToSize(value[0]), valueToSize(value[1])]
-    });
-  };
+//   const handleSizeChange = (value: number[]) => {
+//     onChange({
+//       ...filters,
+//       size: [valueToSize(value[0]), valueToSize(value[1])]
+//     });
+//   };
 
   const filteredModalities = MODALITIES.filter(modality =>
     modality.label.toLowerCase().includes(filterSearch.toLowerCase())
@@ -150,43 +154,43 @@ export function DatasetFilters({ filters, onChange }: DatasetFiltersProps) {
     </div>
   );
 }
-interface FilterGroupProps {
-  title: string;
-  children: React.ReactNode;
-}
+// interface FilterGroupProps {
+//   title: string;
+//   children: React.ReactNode;
+// }
 
-function FilterGroup({ title, children }: FilterGroupProps) {
-  return (
-    <div className="mb-6">
-      <h3 className="text-sm font-medium text-gray-200 mb-3">{title}</h3>
-      {children}
-    </div>
-  );
-}
+// function FilterGroup({ title, children }: FilterGroupProps) {
+//   return (
+//     <div className="mb-6">
+//       <h3 className="text-sm font-medium text-gray-200 mb-3">{title}</h3>
+//       {children}
+//     </div>
+//   );
+// }
 
-interface FilterOptionProps {
-  label: string;
-  count?: number;
-  checked: boolean;
-  onChange: (checked: boolean) => void;
-}
+// interface FilterOptionProps {
+//   label: string;
+//   count?: number;
+//   checked: boolean;
+//   onChange: (checked: boolean) => void;
+// }
 
-function FilterOption({ label, count, checked, onChange }: FilterOptionProps) {
-  return (
-    <label className="flex items-center gap-2 py-1 cursor-pointer group">
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-        className="rounded border-gray-700 bg-gray-900/50 text-blue-500 focus:ring-blue-500"
-      />
-      <span className="text-sm text-gray-400 group-hover:text-gray-300">{label}</span>
-      {count !== undefined && (
-        <span className="text-xs text-gray-500">{count}</span>
-      )}
-    </label>
-  );
-}
+// function FilterOption({ label, count, checked, onChange }: FilterOptionProps) {
+//   return (
+//     <label className="flex items-center gap-2 py-1 cursor-pointer group">
+//       <input
+//         type="checkbox"
+//         checked={checked}
+//         onChange={(e) => onChange(e.target.checked)}
+//         className="rounded border-gray-700 bg-gray-900/50 text-blue-500 focus:ring-blue-500"
+//       />
+//       <span className="text-sm text-gray-400 group-hover:text-gray-300">{label}</span>
+//       {count !== undefined && (
+//         <span className="text-xs text-gray-500">{count}</span>
+//       )}
+//     </label>
+//   );
+// }
 
 // components/search/ModelFilters.tsx
 interface ModelFiltersProps {
