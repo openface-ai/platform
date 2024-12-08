@@ -12,10 +12,10 @@ export default function Hero() {
     |__|        \\/     \\/           \\/     \\/    \\/`}
       </pre> */}
       <h1 className="text-4xl md:text-6xl font-bold mb-6">
-        Open Source AI Model Hub
+        Open Source AI Hub
       </h1>
       <p className="text-gray-400 max-w-2xl mx-auto text-lg mb-8">
-        Discover, share, and deploy AI models in a community-driven ecosystem
+        Discover, share, and deploy AI models & datasets in a community-driven ecosystem
       </p>
       <div className="flex justify-center gap-4">
         <Button size="lg">Explore Models</Button>
