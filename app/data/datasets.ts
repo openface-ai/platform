@@ -12,7 +12,9 @@ export const mockDatasets: Dataset[] = [
       downloads: 15300,
       category: 'Computer Vision',
       numRows: 50000,
-      isViewable: true
+      isViewable: true,
+      task: "Text Generation"
+
     },
     {
       id: '2',
@@ -26,7 +28,9 @@ export const mockDatasets: Dataset[] = [
       downloads: 8900,
       category: 'NLP',
       numRows: 2500000,
-      isViewable: true
+      isViewable: true,
+      task: "Text Generation"
+
     },
     {
       id: '3',
@@ -40,7 +44,9 @@ export const mockDatasets: Dataset[] = [
       downloads: 4200,
       category: 'Audio',
       numRows: 8000,
-      isViewable: true
+      isViewable: true,
+      task: "Text Generation"
+
     },
     {
       id: '4',
@@ -54,7 +60,9 @@ export const mockDatasets: Dataset[] = [
       downloads: 12500,
       category: 'Multimodal',
       numRows: 180000,
-      isViewable: true
+      isViewable: true,
+      task: "Text Generation"
+
     },
     {
       id: '5',
@@ -68,6 +76,8 @@ export const mockDatasets: Dataset[] = [
       downloads: 9800,
       category: 'Computer Vision',
       numRows: 125000,
-      isViewable: true
+      isViewable: true,
+      task: "Text Generation"
+
     }
   ];

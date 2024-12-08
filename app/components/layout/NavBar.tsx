@@ -2,19 +2,21 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Button from '../ui/Button';
 import { useTheme } from '@/app/context/ThemeContext';
 
 export default function Navbar() {
   const { toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <nav className="fixed w-full bg-background/80 backdrop-blur-sm border-b border-gray-800 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="text-primary font-bold">
-          😮 OpenFace
+            😮 OpenFace
           </Link>
           
           {/* Mobile menu button */}
@@ -46,11 +48,11 @@ export default function Navbar() {
             </svg>
           </button>
 
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="#models" className="hover:text-primary transition-colors">
+          <div className="hidden md:flex items-center space-x-4">
+            <Link href="models" className="hover:text-primary transition-colors">
               Models
             </Link>
-            <Link href="#datasets" className="hover:text-primary transition-colors">
+            <Link href="datasets" className="hover:text-primary transition-colors">
               Datasets
             </Link>
             <Link href="#community" className="hover:text-primary transition-colors">
@@ -74,9 +76,22 @@ export default function Navbar() {
                 />
               </svg>
             </button>
-            <Button variant="outline" size="sm">
-              Sign In
-            </Button>
+            <div className="flex items-center space-x-2">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => router.push('/signin')}
+              >
+                Sign In
+              </Button>
+              <Button 
+                variant="primary" 
+                size="sm"
+                onClick={() => router.push('/signup')}
+              >
+                Sign Up
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -111,9 +126,24 @@ export default function Navbar() {
               </svg>
               <span>Toggle Theme</span>
             </button>
-            <Button variant="outline" size="sm" className="w-full">
-              Sign In
-            </Button>
+            <div className="flex flex-col space-y-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full"
+                onClick={() => router.push('/signin')}
+              >
+                Sign In
+              </Button>
+              <Button 
+                variant="primary" 
+                size="sm" 
+                className="w-full"
+                onClick={() => router.push('/signup')}
+              >
+                Sign Up
+              </Button>
+            </div>
           </div>
         </div>
       </div>
