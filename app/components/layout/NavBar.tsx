@@ -44,6 +44,7 @@ export default function NavBar() {
             <Link href="/dashboard" className="hover:text-primary transition-colors">
               Dashboard
             </Link>
+        
             <Button 
               variant="outline" 
               size="sm"
