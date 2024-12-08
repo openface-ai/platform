@@ -16,7 +16,7 @@ export default function NavBar() {
 
   const handleNavigation = (path: string) => {
     router.push(path);
-    setIsMenuOpen(false); // Close menu after navigation
+    setIsMenuOpen(false);
   };
 
   return (
@@ -30,25 +30,17 @@ export default function NavBar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Button 
-              variant="ghost" 
-              onClick={() => router.push('/models')}
-            >
+          <div className="hidden md:flex items-center space-x-4">
+           
+            <Link href="/models" className="hover:text-primary transition-colors">
               Models
-            </Button>
-            <Button 
-              variant="ghost" 
-              onClick={() => router.push('/datasets')}
-            >
+            </Link>
+            <Link href="/datasets" className="hover:text-primary transition-colors">
               Datasets
-            </Button>
+            </Link>
             <Link href="#community" className="hover:text-primary transition-colors">
               Community
             </Link>
-          </div>
-
-          <div className="hidden md:flex items-center space-x-4">
             <Button 
               variant="outline" 
               size="sm"
@@ -78,9 +70,9 @@ export default function NavBar() {
           </button>
         </div>
 
-          {/* Mobile menu */}
-          <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} pb-4`}>
-          <div className="flex flex-col space-y-4 items-center"> {/* Added items-center */}
+        {/* Mobile menu */}
+        <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} pb-4`}>
+          <div className="flex flex-col space-y-4">
             <Button
               variant="ghost"
               className="justify-start w-full text-left"
@@ -95,7 +87,7 @@ export default function NavBar() {
             >
               Datasets
             </Button>
-            <Link href="#community" className="hover:text-primary transition-colors py-2 w-full text-center"> {/* Added w-full and text-center */}
+            <Link href="#community" className="hover:text-primary transition-colors py-2 text-center">
               Community
             </Link>
             <div className="pt-4 flex flex-col space-y-2">
