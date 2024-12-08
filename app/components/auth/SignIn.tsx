@@ -1,4 +1,3 @@
-
 // components/auth/SignIn.tsx
 'use client';
 
@@ -18,9 +17,27 @@ export default function SignIn() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log('Signing in with:', formData);
-    router.push('/dashboard');
+    
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Create mock user data
+      const mockUser = {
+        id: '1',
+        name: 'SayMyName',
+        email: formData.email,
+        avatar: '/placeholder-avatar.png',
+        joinedAt: 'Dec 2024'
+      };
+      
+      // Store user data in sessionStorage
+      sessionStorage.setItem('user', JSON.stringify(mockUser));
+      
+      router.push('/dashboard');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
