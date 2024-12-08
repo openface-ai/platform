@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-green-500 font-bold mb-4">OpenFace</h3>
+            <h3 className="text-green-500 font-bold mb-4">😮OpenFace</h3>
             <p className="text-sm text-gray-400">
               A community-driven platform for sharing AI models and datasets.
             </p>
