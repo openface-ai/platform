@@ -41,9 +41,9 @@ export default function NavBar() {
             <Link href="#community" className="hover:text-primary transition-colors">
               Community
             </Link>
-            <Link href="/dashboard" className="hover:text-primary transition-colors">
+            {/* <Link href="/dashboard" className="hover:text-primary transition-colors">
               Dashboard
-            </Link>
+            </Link> */}
         
             <Button 
               variant="outline" 
