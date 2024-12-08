@@ -15,8 +15,14 @@ export type Dataset = {
     id: string;
     name: string;
     description: string;
-    samples: number;
-    size: string;
+    owner: string;
+    avatar: string;
+    likes: number;
+    isPrivate: boolean;
+    updatedAt: string;
+    downloads: number;
     category: string;
-    lastUpdated: string;
-};
+    // Dataset-specific fields
+    numRows?: number;  // Optional for table icon
+    isViewable?: boolean;  // Optional for "Viewer" label
+  };

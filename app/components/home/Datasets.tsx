@@ -3,8 +3,7 @@
 import { useState, useMemo } from 'react';
 import Button from '../ui/Button';
 import { mockDatasets } from '@/app/data/datasets';
-import { DatasetCard } from '../shared/DatasetCard';
-
+import { Card } from '../shared/Card';
 
 const DATASET_CATEGORIES = ['All', 'Computer Vision', 'NLP', 'Audio', 'Multimodal'];
 
@@ -36,9 +35,11 @@ export default function Datasets() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-6">
           {filteredDatasets.map((dataset) => (
-            <DatasetCard key={dataset.id} dataset={dataset} />
+            <div key={dataset.id} className="bg-gray-950 rounded-lg border border-gray-800">
+              <Card item={dataset} type="dataset" />
+            </div>
           ))}
         </div>
       </div>
