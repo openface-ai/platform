@@ -1,17 +1,21 @@
-export interface Model {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
-  downloads: number;
-}
+export type Model = {
+    id: string;
+    name: string;
+    description: string;
+    owner: string;
+    avatar: string;
+    isPrivate: boolean;
+    updatedAt: string;
+    downloads: number;
+    category: string;
+};
 
-export interface Dataset {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
-  samples: number;
-  size: string;
-  lastUpdated: string;
-}
+export type Dataset = {
+    id: string;
+    name: string;
+    description: string;
+    samples: number;
+    size: string;
+    category: string;
+    lastUpdated: string;
+};
