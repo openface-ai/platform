@@ -19,8 +19,8 @@ export const mockModels: Model[] = [
       description: 'State-of-the-art natural language processing for text analysis and generation.',
       isPrivate: false,
       updatedAt: '5 days ago',
-      downloads: 2300,
-      likes: 33,
+      downloads: 0,
+      likes: 0,
       category: 'NLP'
     },
     {

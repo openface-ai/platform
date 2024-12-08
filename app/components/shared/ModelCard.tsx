@@ -32,16 +32,24 @@ export function ModelCard({ model }: ModelCardProps) {
           {/* Metadata row */}
           <div className="flex items-center gap-2 text-sm text-gray-500 mt-1">
             <span>Updated {model.updatedAt}</span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <HeartIcon className="w-3 h-3" />
-              {model.likes}
-            </span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <DownloadIcon className="w-3 h-3" />
-              {model.downloads}
-            </span>
+            {model.likes > 0 && (
+              <>
+                <span>•</span>
+                <span className="flex items-center gap-1">
+                  <HeartIcon className="w-3 h-3" />
+                  {model.likes}
+                </span>
+              </>
+            )}
+            {model.downloads > 0 && (
+              <>
+                <span>•</span>
+                <span className="flex items-center gap-1">
+                  <DownloadIcon className="w-3 h-3" />
+                  {model.downloads}
+                </span>
+              </>
+            )}
           </div>
         </div>
       </div>
