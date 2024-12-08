@@ -1,4 +1,3 @@
-
 import { Model } from '@/app/utils/type';
 export const mockModels: Model[] = [
     {
@@ -12,7 +11,7 @@ export const mockModels: Model[] = [
       downloads: 1200,
       likes: 328,
       category: 'Computer Vision',
-      task: "Text Generation"
+      task: "Image Recognition"
 
     },
     {
@@ -39,7 +38,7 @@ export const mockModels: Model[] = [
       downloads: 800,
       likes: 69,
       category: 'Audio',
-      task: "Text Generation"
+      task: "Speech Recognition"
 
     },
     {
@@ -53,7 +52,7 @@ export const mockModels: Model[] = [
       downloads: 1500,
       likes: 42,
       category: 'Multimodal',
-      task: "Text Generation"
+      task: "Multimodal Learning"
 
     }
-  ];
+  ]

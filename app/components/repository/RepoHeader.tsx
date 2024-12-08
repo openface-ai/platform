@@ -17,7 +17,24 @@ interface RepoHeaderProps {
     activeTab: RepoTab;
     onTabChange: (tab: RepoTab) => void;
   }
-  
+
+  function getTagStyles(type: string) {
+    switch (type) {
+      case 'task':
+        return 'bg-blue-500 text-white';
+      case 'category':
+        return 'bg-green-500 text-white';
+      case 'language':
+        return 'bg-yellow-500 text-white';
+      case 'model':
+        return 'bg-purple-500 text-white';
+      case 'license':
+        return 'bg-gray-500 text-white';
+      default:
+        return 'bg-gray-500 text-white';
+    }
+  }
+
   export function RepoHeader({ 
     owner, 
     name, 
@@ -122,35 +139,4 @@ interface RepoHeaderProps {
       </div>
     </div>
   );
-}
-
-// function NavTab({ children, active = false }: { children: React.ReactNode; active?: boolean }) {
-//   return (
-//     <button
-//       className={`px-4 py-2 text-sm border-b-2 ${
-//         active
-//           ? 'border-blue-500 text-blue-500'
-//           : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700'
-//       }`}
-//     >
-//       {children}
-//     </button>
-//   );
-// }
-
-function getTagStyles(type: RepositoryTag['type']): string {
-  switch (type) {
-    case 'task':
-      return 'bg-blue-500/10 text-blue-400';
-    case 'framework':
-      return 'bg-purple-500/10 text-purple-400';
-    case 'language':
-      return 'bg-green-500/10 text-green-400';
-    case 'model':
-      return 'bg-yellow-500/10 text-yellow-400';
-    case 'license':
-      return 'bg-gray-500/10 text-gray-400';
-    default:
-      return 'bg-gray-500/10 text-gray-400';
-  }
 }
