@@ -10,7 +10,7 @@ import {
   TagIcon 
 } from 'lucide-react';
 import Button from '../../ui/Button';
-import { RepoBranch, RepositoryTag, RepoCommit, RepoTag } from '@/app/utils/type';
+import { RepoBranch, RepoCommit, RepoTag } from '@/app/utils/type';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu';
 
 interface BranchSelectorProps {

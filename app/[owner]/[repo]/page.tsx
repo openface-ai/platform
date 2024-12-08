@@ -7,7 +7,7 @@ import { ModelCard } from "@/app/components/repository/ModelCard";
 import { RepoHeader } from "@/app/components/repository/RepoHeader";
 import { Settings } from "@/app/components/repository/Settings";
 import { MOCK_REPO_DATA } from "@/app/data/repos";
-import { RepositoryTag, RepoTab } from "@/app/utils/type";
+import { RepoTab } from "@/app/utils/type";
 import { useState } from "react";
 
 

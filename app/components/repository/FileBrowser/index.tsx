@@ -2,21 +2,12 @@
 'use client';
 
 import { useState, useEffect, SetStateAction, Dispatch } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { 
-  ChevronRight, 
   FolderIcon, 
   FileIcon, 
-  GitBranchIcon,
-  HistoryIcon,
-  DownloadIcon, 
   ChevronRightIcon
 } from 'lucide-react';
-import Button from '../../ui/Button';
-import { RepoFile, RepoBranch, RepoCommit, RepoPath } from '@/app/utils/type';
-import { FileViewer } from './FileViewer';
-import { FileList } from './FileList';
-import { BranchSelector } from './BranchSelector';
+import { RepoFile, RepoPath } from '@/app/utils/type';
 import {  mockRepoData } from '@/app/data/mockFiles';
 import { formatBytes, formatCommitDate } from '@/app/utils/utils';
 export interface FileBrowserProps {
@@ -39,7 +30,7 @@ export function FileBrowser({
   const [loading, setLoading] = useState(true);
   const [files, setFiles] = useState<RepoFile[]>([]);
   const [selectedBranch, setSelectedBranch] = useState(defaultBranch);
-
+  console.log(owner)
   useEffect(() => {
     const fetchFiles = async () => {
       setLoading(true);

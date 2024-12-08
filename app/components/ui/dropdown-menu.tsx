@@ -1,4 +1,3 @@
-// components/ui/dropdown-menu.tsx
 'use client';
 
 import * as React from 'react';
@@ -10,13 +9,14 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-type DropdownMenuContentElement = HTMLDivElement;
-type DropdownMenuItemElement = HTMLDivElement;
-type DropdownMenuSeparatorElement = HTMLDivElement;
+interface DropdownMenuProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content> {
+  className?: string;
+}
 
-const DropdownMenuContent = React.forwardRef
-  DropdownMenuPrimitive.DropdownMenuContent
->(({ className, children, ...props }: any, ref: React.LegacyRef<HTMLDivElement> | undefined) => (
+const DropdownMenuContent = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Content>,
+  DropdownMenuProps
+>(({ className, children, ...props }, ref) => (
   <DropdownMenuPrimitive.Portal>
     <DropdownMenuPrimitive.Content
       ref={ref}
@@ -33,9 +33,16 @@ const DropdownMenuContent = React.forwardRef
   </DropdownMenuPrimitive.Portal>
 ));
 
-const DropdownMenuItem = React.forwardRef
-  DropdownMenuPrimitive.DropdownMenuItem
->(({ className, children, ...props }: any, ref: React.LegacyRef<HTMLDivElement> | undefined) => (
+DropdownMenuContent.displayName = 'DropdownMenuContent';
+
+interface DropdownMenuItemProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> {
+  className?: string;
+}
+
+const DropdownMenuItem = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Item>,
+  DropdownMenuItemProps
+>(({ className, children, ...props }, ref) => (
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
@@ -48,15 +55,24 @@ const DropdownMenuItem = React.forwardRef
   </DropdownMenuPrimitive.Item>
 ));
 
-const DropdownMenuSeparator = React.forwardRef
-  DropdownMenuPrimitive.DropdownMenuSeparator
->(({ className, ...props }: any, ref: React.LegacyRef<HTMLDivElement> | undefined) => (
+DropdownMenuItem.displayName = 'DropdownMenuItem';
+
+interface DropdownMenuSeparatorProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator> {
+  className?: string;
+}
+
+const DropdownMenuSeparator = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
+  DropdownMenuSeparatorProps
+>(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
     className={cn('-mx-1 my-1 h-px bg-gray-800', className)}
     {...props}
   />
 ));
+
+DropdownMenuSeparator.displayName = 'DropdownMenuSeparator';
 
 const Root = DropdownMenuPrimitive.Root;
 const Trigger = DropdownMenuPrimitive.Trigger;

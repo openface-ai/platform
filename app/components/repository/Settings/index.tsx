@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // components/repository/Settings/index.tsx
 'use client';
 
@@ -14,7 +15,8 @@ interface SettingsProps {
 
 export function Settings({ owner, repo, isPrivate: initialIsPrivate, hasDiscussions: initialHasDiscussions }: SettingsProps) {
   const [isPrivate, setIsPrivate] = useState(initialIsPrivate);
-  const [hasDiscussions, setHasDiscussions] = useState(initialHasDiscussions);
+  // const [hasDiscussions, setHasDiscussions] = useState(initialHasDiscussions);
+  console.log(initialHasDiscussions)
   const [newName, setNewName] = useState('');
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
 
@@ -22,9 +24,9 @@ export function Settings({ owner, repo, isPrivate: initialIsPrivate, hasDiscussi
     setIsPrivate(!isPrivate);
   };
 
-  const handleTransfer = () => {
-    // Implement transfer logic
-  };
+  // const handleTransfer = () => {
+  //   // Implement transfer logic
+  // };
 
   return (
     <div className="max-w-4xl mx-auto py-8 px-4 space-y-8">

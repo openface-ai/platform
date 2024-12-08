@@ -1,7 +1,6 @@
 // components/repository/RepoTabs.tsx
 'use client';
 
-import { useState } from 'react';
 import { FileText, GitFork, Users, Settings } from 'lucide-react';
 import { RepoTab } from '@/app/utils/type';
 

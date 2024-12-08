@@ -39,55 +39,60 @@ tokenizer = AutoTokenizer.from_pretrained("ruliad/deepthought-8b-llama")
 `;
 
 type MarkdownComponentProps = {
-    node?: any;
-    inline?: boolean;
-    className?: string;
-    children: React.ReactNode;
-  } & React.HTMLAttributes<HTMLElement>;
+  children: React.ReactNode;
+  inline?: boolean;
+  className?: string;
+} & React.HTMLAttributes<HTMLElement>;
+// type MarkdownComponentProps = {
+//     node?: any;
+//     inline?: boolean;
+//     className?: string;
+//     children: React.ReactNode;
+//   } & React.HTMLAttributes<HTMLElement>;
 
-  const markdownComponents: Record<string, React.ComponentType<MarkdownComponentProps>> = {
-    h1: ({ node, ...props }) => (
+const markdownComponents: Record<string, React.ComponentType<MarkdownComponentProps>> = {
+  h1: (props) => (
     <h1 className="text-3xl font-bold mt-8 pb-2 mb-4 border-b border-gray-800 text-gray-200" {...props} />
   ),
-  h2: ({ node, ...props }) => (
+  h2: (props) => (
     <h2 className="text-2xl font-semibold mt-8 pb-2 mb-4 border-b border-gray-800 text-gray-200" {...props} />
   ),
-  h3: ({ node, ...props }) => (
+  h3: (props) => (
     <h3 className="text-xl font-semibold mt-6 mb-4 text-gray-200" {...props} />
   ),
-  h4: ({ node, ...props }) => (
+  h4: (props) => (
     <h4 className="text-lg font-semibold mt-6 mb-4 text-gray-200" {...props} />
   ),
-  p: ({ node, ...props }) => (
+  p: (props) => (
     <p className="mb-4 text-gray-300 leading-relaxed" {...props} />
   ),
-  a: ({ node, ...props }) => (
+  a: (props) => (
     <a className="text-blue-400 hover:text-blue-300 no-underline" {...props} />
   ),
-  ul: ({ node, ...props }) => (
+  ul: (props) => (
     <ul className="list-disc list-inside mb-4 space-y-2 text-gray-300" {...props} />
   ),
-  ol: ({ node, ...props }) => (
+  ol: (props) => (
     <ol className="list-decimal list-inside mb-4 space-y-2 text-gray-300" {...props} />
   ),
-  li: ({ node, ...props }) => (
+  li: (props) => (
     <li className="text-gray-300" {...props} />
   ),
-  blockquote: ({ node, ...props }) => (
+  blockquote: (props) => (
     <blockquote className="border-l-4 border-gray-700 pl-4 my-4 text-gray-400 italic" {...props} />
   ),
-  table: ({ node, ...props }) => (
+  table: (props) => (
     <div className="overflow-x-auto my-4">
       <table className="min-w-full divide-y divide-gray-800 text-gray-300" {...props} />
     </div>
   ),
-  th: ({ node, ...props }) => (
+  th: (props) => (
     <th className="px-4 py-2 bg-gray-800/50 text-left text-sm font-semibold text-gray-200" {...props} />
   ),
-  td: ({ node, ...props }) => (
+  td: (props) => (
     <td className="px-4 py-2 border-b border-gray-800 text-gray-300" {...props} />
   ),
-  code: ({ node, inline, className, children, ...props }) => {
+  code: ({ inline, className, children, ...props }) => {
     const match = /language-(\w+)/.exec(className || '');
     return !inline && match ? (
       <div className="my-4">
@@ -112,15 +117,14 @@ type MarkdownComponentProps = {
       </code>
     );
   },
-  
-    strong: ({ node, ...props }) => (
+  strong: (props) => (
     <strong className="font-semibold text-gray-200" {...props} />
   ),
-  hr: ({ node, ...props }) => (
+  hr: (props) => (
     <hr className="my-8 border-gray-800" {...props} />
   ),
-  img: ({ node, ...props }) => (
-    <img className="rounded-lg max-w-full my-4" {...props} />
+  img: (props) => (
+    <img className="rounded-lg max-w-full my-4" {...props} alt={ ''} />
   ),
 };
 
@@ -143,7 +147,7 @@ export function ModelCard() {
       </div>
     );
   }
-
+  console.log(Node)
   return (
     <article className="px-4 py-6 max-w-none">
       <ReactMarkdown

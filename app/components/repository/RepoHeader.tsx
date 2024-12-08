@@ -124,19 +124,19 @@ interface RepoHeaderProps {
   );
 }
 
-function NavTab({ children, active = false }: { children: React.ReactNode; active?: boolean }) {
-  return (
-    <button
-      className={`px-4 py-2 text-sm border-b-2 ${
-        active
-          ? 'border-blue-500 text-blue-500'
-          : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700'
-      }`}
-    >
-      {children}
-    </button>
-  );
-}
+// function NavTab({ children, active = false }: { children: React.ReactNode; active?: boolean }) {
+//   return (
+//     <button
+//       className={`px-4 py-2 text-sm border-b-2 ${
+//         active
+//           ? 'border-blue-500 text-blue-500'
+//           : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700'
+//       }`}
+//     >
+//       {children}
+//     </button>
+//   );
+// }
 
 function getTagStyles(type: RepositoryTag['type']): string {
   switch (type) {

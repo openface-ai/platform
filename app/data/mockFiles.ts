@@ -1,5 +1,5 @@
 // app/data/mockFiles.ts
-import type { RepoFileStructure, RepoPath, RepoBranch, MockDataStructure } from '@/app/utils/type';
+import type { MockDataStructure } from '@/app/utils/type';
 
 // data/mockFiles.ts
 export const mockRepoData: MockDataStructure = {
