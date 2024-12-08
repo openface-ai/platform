@@ -9,9 +9,9 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OpenFace - Open Source AI Model Hub",
+  title: "OpenFace - Open Source AI Hub",
   description:
-    "A community-driven platform for sharing, discovering, and deploying AI models",
+    "A community-driven platform for sharing, discovering, and deploying AI models and datasets",
   icons: {
     icon: [
       {
