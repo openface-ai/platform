@@ -5,6 +5,7 @@ import { Card } from '../shared/Card';
 import Button from '../ui/Button';
 import { PlusIcon, EditIcon, TrashIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('models');
@@ -22,10 +23,12 @@ export default function Dashboard() {
         <div className="bg-gray-900 rounded-lg p-6 mb-8">
           <div className="flex flex-col md:flex-row items-center gap-6">
             <div className="flex items-center gap-4">
-              <img 
+              <Image 
                 src="/placeholder-avatar.png"
                 alt="User avatar"
-                className="w-16 h-16 rounded-full object-cover"
+                width={64}
+                height={64}
+                className="rounded-full object-cover"
               />
               <div>
                 <h1 className="text-2xl font-bold">Welcome back, User!</h1>
@@ -145,7 +148,7 @@ export default function Dashboard() {
                   <div key={item} className="flex items-start gap-3 text-sm">
                     <div className="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
                     <div>
-                      <p className="text-gray-300">Your model "GPT-4 Fine-tuned" reached 1k downloads</p>
+                      <p className="text-gray-300">Your model &quot;GPT-4 Fine-tuned&quot; reached 1k downloads</p>
                       <p className="text-gray-500">2 hours ago</p>
                     </div>
                   </div>
