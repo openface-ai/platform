@@ -6,15 +6,30 @@ import Button from '../ui/Button';
 import { PlusIcon, EditIcon, TrashIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useAuth } from '@/app/hooks/useAuth';
+import LoadingSpinner from '../ui/LoadingSpinner';
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('models');
   const router = useRouter();
+  const { user, isLoading } = useAuth();
 
   const handleCreate = () => {
-    // Implement navigation to create page
-    router.push(`/create/${activeTab.slice(0, -1)}`); // removes 's' from 'models'/'datasets'
+    router.push(`/create/${activeTab.slice(0, -1)}`);
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (!user) {
+    router.push('/signin');
+    return null;
+  }
 
   return (
     <div className="min-h-screen pt-20 px-4">
@@ -24,15 +39,15 @@ export default function Dashboard() {
           <div className="flex flex-col md:flex-row items-center gap-6">
             <div className="flex items-center gap-4">
               <Image 
-                src="/placeholder-avatar.png"
+                src={user.avatar}
                 alt="User avatar"
                 width={64}
                 height={64}
                 className="rounded-full object-cover"
               />
               <div>
-                <h1 className="text-2xl font-bold">Welcome back, User!</h1>
-                <p className="text-gray-400">Member since Dec 2024</p>
+                <h1 className="text-2xl font-bold">Welcome back, {user.name}!</h1>
+                <p className="text-gray-400">Member since {user.joinedAt}</p>
               </div>
             </div>
             <div className="flex gap-8 ml-auto">
