@@ -10,6 +10,7 @@ export const mockModels: Model[] = [
       isPrivate: false,
       updatedAt: '2 days ago',
       downloads: 1200,
+      likes: 328,
       category: 'Computer Vision'
     },
     {
@@ -20,7 +21,8 @@ export const mockModels: Model[] = [
       description: 'State-of-the-art natural language processing for text analysis and generation.',
       isPrivate: false,
       updatedAt: '5 days ago',
-      downloads: 2300,
+      downloads: 0,
+      likes: 0,
       category: 'NLP'
     },
     {
@@ -32,6 +34,7 @@ export const mockModels: Model[] = [
       isPrivate: false,
       updatedAt: '8 days ago',
       downloads: 800,
+      likes: 69,
       category: 'Audio'
     },
     {
@@ -43,6 +46,7 @@ export const mockModels: Model[] = [
       isPrivate: false,
       updatedAt: '12 days ago',
       downloads: 1500,
+      likes: 42,
       category: 'Multimodal'
     }
   ];

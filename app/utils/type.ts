@@ -4,6 +4,7 @@ export type Model = {
     description: string;
     owner: string;
     avatar: string;
+    likes: number;
     isPrivate: boolean;
     updatedAt: string;
     downloads: number;
