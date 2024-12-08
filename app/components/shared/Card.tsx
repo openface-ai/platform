@@ -5,9 +5,10 @@ import { useWindowSize } from '@/app/hooks/useWindowSize';
 type CardProps = {
   item: Model | Dataset;
   type: 'model' | 'dataset';
+  showDescription?: boolean;
 };
 
-export function Card({ item, type }: CardProps) {
+export function Card({ item, type, showDescription = false }: CardProps) {
   const { width } = useWindowSize();
   const isMobile = width < 768;
   const isDataset = type === 'dataset';
@@ -15,7 +16,6 @@ export function Card({ item, type }: CardProps) {
   return (
     <div className="flex items-center justify-between py-4 border-b border-gray-800 hover:bg-gray-900/50 hover:border-blue-500 transition-all cursor-pointer px-4">
       <div className="flex items-center gap-3 w-full">
-        {/* Owner avatar - hidden on mobile */}
         <img 
           src={item.avatar}
           alt={`${item.owner}'s avatar`}
@@ -23,7 +23,6 @@ export function Card({ item, type }: CardProps) {
         />
         
         <div className="w-full">
-          {/* Name row */}
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-gray-300 text-sm md:text-base">
               <span className="text-gray-500">{!isMobile && `${item.owner}/`}</span>
@@ -36,14 +35,13 @@ export function Card({ item, type }: CardProps) {
             )}
           </div>
           
-          {/* Description - show only on desktop */}
-          <p className="text-gray-400 text-sm mt-1 hidden md:block">
-            {item.description}
-          </p>
+          {showDescription && (
+            <p className="text-gray-400 text-sm mt-1 hidden md:block">
+              {item.description}
+            </p>
+          )}
           
-          {/* Metadata row */}
           <div className="flex items-center gap-2 text-xs md:text-sm text-gray-500 mt-1 flex-wrap">
-            {/* Show minimal info on mobile */}
             {!isMobile && (
               <>
                 {isDataset && (item as Dataset).isViewable && (
@@ -56,7 +54,6 @@ export function Card({ item, type }: CardProps) {
               </>
             )}
 
-            {/* Always show essential stats */}
             <div className="flex items-center gap-2">
               {isDataset && (item as Dataset).numRows != null && (
                 <span className="flex items-center gap-1">
