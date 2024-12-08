@@ -8,6 +8,7 @@ export const mockModels: Model[] = [
       isPrivate: false,
       updatedAt: '2 days ago',
       downloads: 1200,
+      likes: 328,
       category: 'Computer Vision'
     },
     {
@@ -19,6 +20,7 @@ export const mockModels: Model[] = [
       isPrivate: false,
       updatedAt: '5 days ago',
       downloads: 2300,
+      likes: 33,
       category: 'NLP'
     },
     {
@@ -30,6 +32,7 @@ export const mockModels: Model[] = [
       isPrivate: false,
       updatedAt: '8 days ago',
       downloads: 800,
+      likes: 69,
       category: 'Audio'
     },
     {
@@ -41,6 +44,7 @@ export const mockModels: Model[] = [
       isPrivate: false,
       updatedAt: '12 days ago',
       downloads: 1500,
+      likes: 42,
       category: 'Multimodal'
     }
   ];
