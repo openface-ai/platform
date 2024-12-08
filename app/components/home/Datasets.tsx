@@ -18,16 +18,17 @@ export default function Datasets() {
   }, [activeCategory]);
 
   return (
-    <section className="py-20 px-4 bg-gray-900" id="datasets">
+    <section className="py-12 md:py-20 px-4 bg-gray-900" id="datasets">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">Featured Datasets</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">Featured Datasets</h2>
         
-        <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
+        <div className="flex gap-2 mb-6 md:mb-8 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0">
           {DATASET_CATEGORIES.map((category) => (
             <Button
               key={category}
               variant={activeCategory === category ? 'primary' : 'outline'}
               size="sm"
+              className="whitespace-nowrap"
               onClick={() => setActiveCategory(category)}
             >
               {category}
@@ -35,7 +36,7 @@ export default function Datasets() {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 gap-4 md:gap-6">
           {filteredDatasets.map((dataset) => (
             <div key={dataset.id} className="bg-gray-950 rounded-lg border border-gray-800">
               <Card item={dataset} type="dataset" />
