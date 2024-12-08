@@ -49,10 +49,10 @@ export default function Navbar() {
           </button>
 
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="#models" className="hover:text-primary transition-colors">
+            <Link href="models" className="hover:text-primary transition-colors">
               Models
             </Link>
-            <Link href="#datasets" className="hover:text-primary transition-colors">
+            <Link href="datasets" className="hover:text-primary transition-colors">
               Datasets
             </Link>
             <Link href="#community" className="hover:text-primary transition-colors">

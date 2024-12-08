@@ -11,7 +11,9 @@ export const mockModels: Model[] = [
       updatedAt: '2 days ago',
       downloads: 1200,
       likes: 328,
-      category: 'Computer Vision'
+      category: 'Computer Vision',
+      task: "Text Generation"
+
     },
     {
       id: '2',
@@ -23,7 +25,8 @@ export const mockModels: Model[] = [
       updatedAt: '5 days ago',
       downloads: 0,
       likes: 0,
-      category: 'NLP'
+      category: 'NLP',
+      task: "Text Generation"
     },
     {
       id: '3',
@@ -35,7 +38,9 @@ export const mockModels: Model[] = [
       updatedAt: '8 days ago',
       downloads: 800,
       likes: 69,
-      category: 'Audio'
+      category: 'Audio',
+      task: "Text Generation"
+
     },
     {
       id: '4',
@@ -47,6 +52,8 @@ export const mockModels: Model[] = [
       updatedAt: '12 days ago',
       downloads: 1500,
       likes: 42,
-      category: 'Multimodal'
+      category: 'Multimodal',
+      task: "Text Generation"
+
     }
   ];
