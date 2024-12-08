@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useUI } from '@/app/context/UIContext';
 
 export default function Toast() {

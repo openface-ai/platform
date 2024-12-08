@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '../ui/Button';
+import { Dataset } from '@/app/utils/type';
 
 type DatasetCardProps = {
   dataset: Dataset;

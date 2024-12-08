@@ -1,3 +1,5 @@
+
+import { Model } from '@/app/utils/type';
 export const mockModels: Model[] = [
     {
       id: '1',

@@ -1,3 +1,4 @@
+import { Dataset } from '@/app/utils/type';
 export const mockDatasets: Dataset[] = [
     {
       id: '1',
