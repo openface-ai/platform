@@ -2,20 +2,24 @@
 
 import { useState, useMemo } from 'react';
 import Button from '../ui/Button';
-import { mockModels } from '@/app/data/models';
 import { Card } from '../shared/Card';
+import { Model } from '@/app/utils/type';
 
 const CATEGORIES = ['All', 'Computer Vision', 'NLP', 'Audio', 'Multimodal'];
 
-export default function Models() {
+interface ModelsProps {
+  models: Model[];
+}
+
+export default function Models({ models }: ModelsProps) {
   const [activeCategory, setActiveCategory] = useState('All');
 
   const filteredModels = useMemo(() => {
     if (activeCategory === 'All') {
-      return mockModels;
+      return models;
     }
-    return mockModels.filter(model => model.category === activeCategory);
-  }, [activeCategory]);
+    return models.filter(model => model.category === activeCategory);
+  }, [activeCategory, models]);
 
   return (
     <section className="py-20 px-4" id="models">

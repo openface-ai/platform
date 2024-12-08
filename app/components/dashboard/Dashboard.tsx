@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useAuth } from '@/app/hooks/useAuth';
 import LoadingSpinner from '../ui/LoadingSpinner';
+import { mockModels } from '@/app/data/models';
+import { mockDatasets } from '@/app/data/datasets';
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('models');
@@ -31,6 +33,8 @@ export default function Dashboard() {
     return null;
   }
 
+  const data = activeTab === 'models' ? mockModels : mockDatasets;
+
   return (
     <div className="min-h-screen pt-20 px-4">
       <div className="max-w-7xl mx-auto">
@@ -38,7 +42,7 @@ export default function Dashboard() {
         <div className="bg-gray-900 rounded-lg p-6 mb-8">
           <div className="flex flex-col md:flex-row items-center gap-6">
             <div className="flex items-center gap-4">
-              <Image 
+              <Image
                 src={user.avatar}
                 alt="User avatar"
                 width={64}
@@ -108,8 +112,8 @@ export default function Dashboard() {
 
             {/* Content Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[1, 2, 3, 4].map((item) => (
-                <div key={item} className="group relative bg-gray-950 rounded-lg border border-gray-800">
+              {data.map((item) => (
+                <div key={item.id} className="group relative bg-gray-950 rounded-lg border border-gray-800">
                   <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <Button
                       variant="ghost"
@@ -128,70 +132,50 @@ export default function Dashboard() {
                       <TrashIcon className="w-4 h-4" />
                     </Button>
                   </div>
-                  <Card
-                    item={{
-                      id: item.toString(),
-                      name: `Sample ${activeTab === 'models' ? 'Model' : 'Dataset'} ${item}`,
-                      description: 'This is a sample description',
-                      category: 'Computer Vision',
-                      likes: 100,
-                      owner: 'user',
-                      avatar: '/placeholder-avatar.png',
-                      isPrivate: false,
-                      updatedAt: '2 days ago',
-                      downloads: 50,
-                      task: 'Text Generation',
-                      ...(activeTab === 'datasets' && {
-                        numRows: 1000,
-                        isViewable: true,
-                      })
-                    }}
-                    type={activeTab === 'models' ? 'model' : 'dataset'}
-                  />
+                  <Card item={item} type={activeTab === 'models' ? 'model' : 'dataset'} />
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right Column - Activity Feed & Recommendations */}
-          <div className="space-y-8">
-            {/* Activity Feed */}
-            <div className="bg-gray-900 rounded-lg p-6">
-              <h2 className="text-xl font-bold mb-4">Recent Activity</h2>
-              <div className="space-y-4">
-                {[1, 2, 3].map((item) => (
-                  <div key={item} className="flex items-start gap-3 text-sm">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
-                    <div>
-                      <p className="text-gray-300">Your model &quot;GPT-4 Fine-tuned&quot; reached 1k downloads</p>
-                      <p className="text-gray-500">2 hours ago</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          {/* Right Column - Recent Activity & Recommendations */}
+          <div className="lg:col-span-1 space-y-8">
+            {/* Recent Activity */}
+            <div className="bg-gray-950 rounded-lg border border-gray-800 p-6">
+              <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+              <ul className="space-y-4">
+                {/* Replace with actual recent activity data */}
+                <li className="text-gray-400">
+                  You liked <span className="font-medium text-gray-300">GPT-Vision Pro</span> 2 hours ago
+                </li>
+                <li className="text-gray-400">
+                  You downloaded <span className="font-medium text-gray-300">Urban Sounds</span> dataset 5 hours ago
+                </li>
+                <li className="text-gray-400">
+                  You updated <span className="font-medium text-gray-300">TextMaster NLP</span> yesterday
+                </li>
+              </ul>
             </div>
 
-            {/* Recommendations */}
-            <div className="bg-gray-900 rounded-lg p-6">
-              <h2 className="text-xl font-bold mb-4">Recommended for You</h2>
-              <div className="space-y-4">
-                {[1, 2].map((item) => (
-                  <div key={item} className="p-4 bg-gray-950 rounded-lg border border-gray-800">
-                    <h3 className="font-medium mb-2">Stable Diffusion v2</h3>
-                    <p className="text-sm text-gray-400 mb-3">
-                      Latest version of the popular image generation model
-                    </p>
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-500">10k downloads</span>
-                      <Button variant="outline" size="sm">View Details</Button>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            {/* Recommended for you */}
+            <div className="bg-gray-950 rounded-lg border border-gray-800 p-6">
+              <h2 className="text-xl font-semibold mb-4">Recommended for you</h2>
+              <ul className="space-y-4">
+                {/* Replace with actual recommendation data */}
+                <li className="text-gray-400">
+                  <span className="font-medium text-gray-300">AudioSense v1.2</span> - Speech recognition model
+                </li>
+                <li className="text-gray-400">
+                  <span className="font-medium text-gray-300">Multilingual Sentiment</span> dataset - 50 languages
+                </li>
+                <li className="text-gray-400">
+                  <span className="font-medium text-gray-300">Video-Text Pairs</span> dataset - Multimodal learning
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-} 
+}

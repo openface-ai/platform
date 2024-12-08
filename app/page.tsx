@@ -1,15 +1,19 @@
-import Hero from '@/app/components/home/Hero';
-import Models from '@/app/components/home/Models';
-import Layout from '@/app/components/layout/Layout';
+
+import NavBar from './components/layout/NavBar';
+import Models from './components/home/Models';
 import Datasets from './components/home/Datasets';
+import Footer from './components/layout/Footer';
+import { mockModels } from './data/models';
 
 export default function Home() {
   return (
-    <Layout>
-      <Hero />
-      <Models />
-      <Datasets />
-    </Layout>
+    <div className="bg-gray-950 text-white min-h-screen flex flex-col">
+      <NavBar />
+      <main className="flex-1">
+        <Models models={mockModels} />
+        <Datasets/>
+      </main>
+      <Footer />
+    </div>
   );
 }
-
