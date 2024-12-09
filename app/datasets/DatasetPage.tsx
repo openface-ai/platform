@@ -1,40 +1,44 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import { SearchIcon, SlidersHorizontalIcon } from 'lucide-react';
-import { Card } from '../components/shared/Card';
-import type { DatasetSortOption, DatasetFilterState } from '../utils/type';
-import { mockDatasets } from '../data/datasets';
-import LoadingSpinner from '../components/shared/LoadingSpinner';
-import Layout from '../components/layout/Layout';
-import { DatasetFilters } from '../components/search/Filters';
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { SearchIcon, SlidersHorizontalIcon } from "lucide-react";
+import { Card } from "../components/shared/Card";
+import type { DatasetSortOption, DatasetFilterState } from "../utils/type";
+import { mockDatasets } from "../data/datasets";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
+import Layout from "../components/layout/Layout";
+import { DatasetFilters } from "../components/search/Filters";
 
 const SORT_OPTIONS: DatasetSortOption[] = [
-  'Trending',
-  'Most likes',
-  'Most downloads',
-  'Recently updated'
+  "Trending",
+  "Most likes",
+  "Most downloads",
+  "Recently updated",
 ];
 
 interface DatasetsPageProps {
-    updateUrl: (updates: Record<string, string>) => void;
-    getParam: (key: string) => string | null;
-  }
-  
-  export default function DatasetsPage({ updateUrl, getParam }: DatasetsPageProps) {
+  updateUrl: (updates: Record<string, string>) => void;
+  getParam: (key: string) => string | null;
+}
 
-    const [isLoading, setIsLoading] = useState(true);
+export default function DatasetsPage({
+  updateUrl,
+  getParam,
+}: DatasetsPageProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const [datasets] = useState(mockDatasets);
   const isInitialMount = useRef(true);
 
   // State management with initial values from URL
-  const [searchQuery, setSearchQuery] = useState(getParam('q') || '');
-  const [sortBy, setSortBy] = useState<DatasetSortOption>((getParam('sort') as DatasetSortOption) || 'Trending');
+  const [searchQuery, setSearchQuery] = useState(getParam("q") || "");
+  const [sortBy, setSortBy] = useState<DatasetSortOption>(
+    (getParam("sort") as DatasetSortOption) || "Trending",
+  );
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [filters, setFilters] = useState<DatasetFilterState>({
-    modalities: getParam('modalities')?.split(',') || [],
-    formats: getParam('formats')?.split(',') || [],
-    size: getParam('size')?.split(',').map(Number) || []
+    modalities: getParam("modalities")?.split(",") || [],
+    formats: getParam("formats")?.split(",") || [],
+    size: getParam("size")?.split(",").map(Number) || [],
   });
 
   // URL updates
@@ -47,11 +51,13 @@ interface DatasetsPageProps {
     const currentParams = new URLSearchParams(window.location.search);
     const newParams = new URLSearchParams();
 
-    if (searchQuery) newParams.set('q', searchQuery);
-    if (sortBy) newParams.set('sort', sortBy);
-    if (filters.modalities.length) newParams.set('modalities', filters.modalities.join(','));
-    if (filters.formats.length) newParams.set('formats', filters.formats.join(','));
-    if (filters.size.length) newParams.set('size', filters.size.join(','));
+    if (searchQuery) newParams.set("q", searchQuery);
+    if (sortBy) newParams.set("sort", sortBy);
+    if (filters.modalities.length)
+      newParams.set("modalities", filters.modalities.join(","));
+    if (filters.formats.length)
+      newParams.set("formats", filters.formats.join(","));
+    if (filters.size.length) newParams.set("size", filters.size.join(","));
 
     const newSearch = newParams.toString();
     if (newSearch !== currentParams.toString()) {
@@ -60,62 +66,72 @@ interface DatasetsPageProps {
   }, [searchQuery, sortBy, filters, updateUrl]);
 
   // Sort function
-  const sortDatasets = useCallback((datasetsToSort: typeof datasets) => {
-    switch (sortBy) {
-      case 'Most likes':
-        return [...datasetsToSort].sort((a, b) => (b.likes || 0) - (a.likes || 0));
-      case 'Most downloads':
-        return [...datasetsToSort].sort((a, b) => b.downloads - a.downloads);
-      case 'Recently updated':
-        return [...datasetsToSort].sort((a, b) => 
-          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-        );
-      default:
-        return datasetsToSort;
-    }
-  }, [sortBy]);
+  const sortDatasets = useCallback(
+    (datasetsToSort: typeof datasets) => {
+      switch (sortBy) {
+        case "Most likes":
+          return [...datasetsToSort].sort(
+            (a, b) => (b.likes || 0) - (a.likes || 0),
+          );
+        case "Most downloads":
+          return [...datasetsToSort].sort((a, b) => b.downloads - a.downloads);
+        case "Recently updated":
+          return [...datasetsToSort].sort(
+            (a, b) =>
+              new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+          );
+        default:
+          return datasetsToSort;
+      }
+    },
+    [sortBy],
+  );
 
-// Filter and sort datasets
-const filteredDatasets = useMemo(() => {
+  // Filter and sort datasets
+  const filteredDatasets = useMemo(() => {
     let filtered = [...datasets];
-  
+
     if (searchQuery) {
-      filtered = filtered.filter(dataset => 
-        dataset.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        dataset.owner.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter(
+        (dataset) =>
+          dataset.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          dataset.owner.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     }
-  
+
     if (filters.modalities.length) {
-      filtered = filtered.filter(dataset => {
+      filtered = filtered.filter((dataset) => {
         // First check if dataset.modalities exists
         if (!dataset.modalities) return false;
         // Then check if any of the filter modalities match
-        return dataset.modalities.some(datasetModality => 
-          filters.modalities.includes(datasetModality)
+        return dataset.modalities.some((datasetModality) =>
+          filters.modalities.includes(datasetModality),
         );
       });
     }
-  
+
     if (filters.formats.length) {
-      filtered = filtered.filter(dataset => {
+      filtered = filtered.filter((dataset) => {
         // Check if format exists and is included in the filters
-        return dataset.format ? filters.formats.includes(dataset.format) : false;
+        return dataset.format
+          ? filters.formats.includes(dataset.format)
+          : false;
       });
     }
-  
+
     if (filters.size.length === 2) {
-      filtered = filtered.filter(dataset => {
+      filtered = filtered.filter((dataset) => {
         // Check if numRows exists and is within range
-        return dataset.numRows ? 
-          (dataset.numRows >= filters.size[0] && dataset.numRows <= filters.size[1]) : 
-          false;
+        return dataset.numRows
+          ? dataset.numRows >= filters.size[0] &&
+              dataset.numRows <= filters.size[1]
+          : false;
       });
     }
-  
+
     return sortDatasets(filtered);
   }, [datasets, searchQuery, filters, sortDatasets]);
-  
+
   // Loading state
   useEffect(() => {
     setIsLoading(true);
@@ -141,7 +157,9 @@ const filteredDatasets = useMemo(() => {
             <div className="py-4 flex flex-col md:flex-row items-center gap-4">
               {/* Search and Count */}
               <div className="flex-1 flex items-center gap-4 w-full">
-                <h1 className="text-xl font-semibold text-gray-200">Datasets</h1>
+                <h1 className="text-xl font-semibold text-gray-200">
+                  Datasets
+                </h1>
                 <span className="text-gray-400 text-sm">
                   {filteredDatasets.length.toLocaleString()}
                 </span>
@@ -164,8 +182,10 @@ const filteredDatasets = useMemo(() => {
                   onChange={(e) => handleSort(e.target.value)}
                   className="appearance-none bg-gray-900/50 border border-gray-700 rounded-md px-4 py-2 text-sm text-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 >
-                  {SORT_OPTIONS.map(option => (
-                    <option key={option} value={option}>{option}</option>
+                  {SORT_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -180,10 +200,7 @@ const filteredDatasets = useMemo(() => {
               {/* Sidebar */}
               <div className="hidden md:block w-64 flex-shrink-0">
                 <div className="sticky top-40">
-                  <DatasetFilters
-                    filters={filters}
-                    onChange={setFilters}
-                  />
+                  <DatasetFilters filters={filters} onChange={setFilters} />
                 </div>
               </div>
 
@@ -196,7 +213,10 @@ const filteredDatasets = useMemo(() => {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {filteredDatasets.map((dataset) => (
-                      <div key={dataset.id} className="bg-gray-950 rounded-lg border border-gray-800">
+                      <div
+                        key={dataset.id}
+                        className="bg-gray-950 rounded-lg border border-gray-800"
+                      >
                         <Card item={dataset} type="dataset" />
                       </div>
                     ))}
@@ -205,7 +225,9 @@ const filteredDatasets = useMemo(() => {
 
                 {!isLoading && filteredDatasets.length === 0 && (
                   <div className="text-center py-12">
-                    <p className="text-gray-400">No datasets found matching your criteria</p>
+                    <p className="text-gray-400">
+                      No datasets found matching your criteria
+                    </p>
                   </div>
                 )}
               </div>
@@ -225,20 +247,18 @@ const filteredDatasets = useMemo(() => {
           <div className="fixed inset-0 z-50 bg-background p-4 md:hidden">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold text-gray-200">Filters</h2>
-              <button 
+              <button
                 onClick={() => setShowMobileFilters(false)}
                 className="text-gray-400 hover:text-gray-300"
               >
                 ✕
               </button>
             </div>
-            <DatasetFilters
-              filters={filters}
-              onChange={setFilters}
-            />
+            <DatasetFilters filters={filters} onChange={setFilters} />
           </div>
         )}
       </div>
     </Layout>
   );
 }
+

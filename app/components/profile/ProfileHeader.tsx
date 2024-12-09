@@ -90,7 +90,7 @@ export function ProfileHeader({ user, activeTab, onTabChange }: ProfileProps) {
 
   return (
     <div className="border-b border-gray-800 mx-7">
-      <div className="flex flex-row justify-between max-w-7xl mx-auto p-4">
+      <div className="flex lg:flex-row flex-col justify-between max-w-7xl mx-auto p-4">
         <div className="flex flex-col items-start justify-between">
           <div className="flex items-center gap-2 p-2">
             <Image
@@ -116,7 +116,7 @@ export function ProfileHeader({ user, activeTab, onTabChange }: ProfileProps) {
           </div>
           {renderSocials()}
         </div>
-        <div className="flex flex-row justify-around">
+        <div className="flex lg:flex-row flex-col justify-around">
           <div className="m-2">
             <span className="flex flex-row m-2">
               <Microscope size={20} className="mr-2" />
