@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Button from "../ui/Button";
 import { useRouter } from "next/navigation";
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { UserProfile, useUser } from "@auth0/nextjs-auth0/client";
 import { useState, useRef, useEffect } from "react";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 export default function AuthButton() {
   const { user, isLoading } = useUser();
@@ -14,11 +15,6 @@ export default function AuthButton() {
   const logout = () => {
     setShowDropdown(false);
     router.push("/api/auth/logout");
-  };
-
-  const userDashboard = () => {
-    // may need to change [owner]/[repo] to be [owner]/repo/[repo] so [owner]/dashboard can be valid
-    // router.push(`${user.name}/dashboard`);
   };
 
   const userImgSrc =
@@ -50,7 +46,7 @@ export default function AuthButton() {
   return (
     <div className="relative">
       {isLoading ? (
-        <span>...</span>
+        <LoadingSpinner />
       ) : user ? (
         <div className="relative">
           <Image
@@ -70,7 +66,7 @@ export default function AuthButton() {
               <div className="py-1 text-gray-700">
                 <button
                   className="block w-full px-4 py-2 text-left hover:bg-gray-100"
-                  onClick={userDashboard}
+                  onClick={() => router.push(`/${user.sub}`)}
                 >
                   Profile
                 </button>

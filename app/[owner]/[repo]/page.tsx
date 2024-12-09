@@ -1,4 +1,4 @@
-// app/[owner]/[repo]/page.tsx
+// app/[owner]/repo/[repo].tsx
 "use client";
 
 import Layout from "@/app/components/layout/Layout";
@@ -8,10 +8,15 @@ import { RepoHeader } from "@/app/components/repository/RepoHeader";
 import { Settings } from "@/app/components/repository/Settings";
 import { MOCK_REPO_DATA } from "@/app/data/repos";
 import { RepoTab } from "@/app/utils/type";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 
 export default function RepositoryPage() {
   const [activeTab, setActiveTab] = useState<RepoTab>("model-card");
+  const params = useParams();
+  const { owner, repo } = params;
+  console.log("owner: ", owner);
+  console.log("repo: ", repo);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -60,4 +65,3 @@ export default function RepositoryPage() {
     </Layout>
   );
 }
-
