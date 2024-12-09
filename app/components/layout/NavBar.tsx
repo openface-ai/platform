@@ -51,30 +51,6 @@ export default function NavBar() {
               Community
             </Link>
             <AuthButton />
-
-            {/*{user ? (
-              <>
-                <UserMenu user={user} onSignOut={handleSignOut} />
-              </>
-            ) : (
-              <>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => router.push("/api/auth/login")}
-                >
-                  Sign In
-                </Button>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={() => router.push("/signup")}
-                >
-                  Sign Up
-                </Button>
-              </>
-            )}
-            */}
           </div>
 
           {/* Mobile menu button */}
@@ -92,9 +68,29 @@ export default function NavBar() {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {/* Add mobile menu items */}
+          <div className="md:hidden ">
+            <div className="px-2 pt-2 pb-3 space-y-1 flex flex-col items-end">
+              <Link
+                href="/models"
+                className="hover:text-primary transition-colors"
+              >
+                Models
+              </Link>
+              <Link
+                href="/datasets"
+                className="hover:text-primary transition-colors"
+              >
+                Datasets
+              </Link>
+              <Link
+                href="#community"
+                className="hover:text-primary transition-colors"
+              >
+                Community
+              </Link>
+              <div className="pt-2">
+                <AuthButton />
+              </div>
             </div>
           </div>
         )}
