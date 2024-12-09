@@ -37,8 +37,8 @@ export function AccountSettings({ user }: AccountSettingsProps) {
             type="text"
             required
             className="block w-full px-3 py-2 bg-gray-900/50 border border-gray-700 rounded-md text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-            value={user.auth_profile.name ? user.auth_profile.name : ""}
-            onChange={(e) => (user.auth_profile.name = e.target.value)}
+            value={user.username ? user.username : ""}
+            onChange={(e) => (user.username = e.target.value)}
           />
         </div>
 
@@ -51,8 +51,8 @@ export function AccountSettings({ user }: AccountSettingsProps) {
             <input
               type="text"
               className="block w-full px-3 py-2 bg-gray-900/50 border border-gray-700 rounded-md text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-              value={user.auth_profile.email ? user.auth_profile.email : ""}
-              onChange={(e) => (user.auth_profile.email = e.target.value)}
+              value={user.email ? user.email : ""}
+              onChange={(e) => (user.email = e.target.value)}
             />
           </div>
         </div>

@@ -21,6 +21,23 @@ export function ProfileSettings({ user }: ProfileSettingsProps) {
     <div className="flex flex-col w-full">
       <h1 className="font-bold text-lg mb-4">Profile Settings</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label
+            htmlFor="fullname"
+            className="block text-sm text-gray-400 mb-1"
+          >
+            Full Name
+          </label>
+          <input
+            id="fullname"
+            type="text"
+            required
+            className="block w-full px-3 py-2 bg-gray-900/50 border border-gray-700 rounded-md text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+            value={user.fullname}
+            onChange={(e) => (user.fullname = e.target.value)}
+          />
+        </div>
+
         {/* Avatar Upload */}
         <div>
           <label className="block text-sm text-gray-400 mb-1">
@@ -46,14 +63,14 @@ export function ProfileSettings({ user }: ProfileSettingsProps) {
         <div className="space-y-4">
           <div>
             <label className="flex items-center text-sm text-gray-400 mb-1 gap-2">
-              <TwitterIcon className="w-4 h-4" />
-              Twitter username <span className="text-gray-500">(optional)</span>
+              <TwitterIcon className="w-4 h-4" />X username{" "}
+              <span className="text-gray-500">(optional)</span>
             </label>
             <input
               type="text"
               className="block w-full px-3 py-2 bg-gray-900/50 border border-gray-700 rounded-md text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-              value={user.twitter ? user.twitter : ""}
-              onChange={(e) => (user.twitter = e.target.value)}
+              value={user.x ? user.x : ""}
+              onChange={(e) => (user.x = e.target.value)}
             />
           </div>
 

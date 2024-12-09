@@ -65,7 +65,7 @@ export default function ProfilePage() {
             />
           </div>
           <div className="flex-1 bg-gray-900">
-            <div className="max-w-7xl mx-auto">{renderTabContent()}</div>
+            <div className="max-w-7xl m-7">{renderTabContent()}</div>
           </div>
         </div>
       )}

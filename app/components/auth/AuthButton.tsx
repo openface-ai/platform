@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { UserProfile, useUser } from "@auth0/nextjs-auth0/client";
 import { useState, useRef, useEffect } from "react";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import { MockUserData } from "@/app/data/users";
 
 export default function AuthButton() {
   const { user, isLoading } = useUser();
@@ -12,6 +13,7 @@ export default function AuthButton() {
   const dropdownTriggerRef = useRef(null);
   const dropdownMenuRef = useRef(null);
 
+  const userData = user ? MockUserData(user) : undefined;
   const logout = () => {
     setShowDropdown(false);
     router.push("/api/auth/logout");
@@ -47,7 +49,7 @@ export default function AuthButton() {
     <div className="relative">
       {isLoading ? (
         <LoadingSpinner />
-      ) : user ? (
+      ) : userData ? (
         <div className="relative">
           <Image
             src={userImgSrc}
@@ -66,7 +68,7 @@ export default function AuthButton() {
               <div className="py-1 text-gray-700">
                 <button
                   className="block w-full px-4 py-2 text-left hover:bg-gray-100"
-                  onClick={() => router.push(`/${user.sub}`)}
+                  onClick={() => router.push(`/${userData.username}`)}
                 >
                   Profile
                 </button>
@@ -84,7 +86,6 @@ export default function AuthButton() {
       ) : (
         <Button
           variant="primary"
-          // className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
           onClick={() => router.push("/api/auth/login")}
         >
           Login

@@ -164,11 +164,16 @@ interface UserProfile {
 */
 
 export interface UserData {
-  auth_profile: UserProfile;
+  sub_token_claim: string;
+  username: string;
+  avatar?: string;
+  fullname?: string;
+  email?: string;
   following: string[];
   followers: number;
   interests: string[];
-  twitter?: string;
+  organizations: string[];
+  x?: string;
   github?: string;
   linkedin?: string;
   homepage?: string;
