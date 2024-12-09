@@ -15,7 +15,7 @@ export const MockUserData = (profile: UserProfile): UserData => {
     followers: Math.floor(Math.random() * 1000), // Mock random follower count
     interests: ["Computer Vision", "NLP"],
     organizations: [],
-    x: undefined,
+    twitter: undefined,
     linkedin: undefined,
     github:
       provider == "github"

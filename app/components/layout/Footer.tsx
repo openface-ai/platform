@@ -57,7 +57,7 @@ export default function Footer() {
                   href="https://x.com/openface_ai"
                   className="hover:text-green-500"
                 >
-                  X
+                  Twitter
                 </Link>
               </li>
             </ul>

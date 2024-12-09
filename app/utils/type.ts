@@ -173,7 +173,7 @@ export interface UserData {
   followers: number;
   interests: string[];
   organizations: string[];
-  x?: string;
+  twitter?: string;
   github?: string;
   linkedin?: string;
   homepage?: string;

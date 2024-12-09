@@ -27,7 +27,7 @@ export function ProfileHeader({ user, activeTab, onTabChange }: ProfileProps) {
       { id: "homepage" as const, label: "Homepage", icon: Home },
       { id: "linkedin" as const, label: "LinkedIn", icon: LinkedinIcon },
       { id: "github" as const, label: "GitHub", icon: GithubIcon },
-      { id: "x" as const, label: "X", icon: TwitterIcon },
+      { id: "twitter" as const, label: "Twitter", icon: TwitterIcon },
     ];
     return (
       <div className="flex flex-row">
@@ -40,8 +40,8 @@ export function ProfileHeader({ user, activeTab, onTabChange }: ProfileProps) {
                 return user.linkedin;
               case "github":
                 return user.github;
-              case "x":
-                return user.x;
+              case "twitter":
+                return user.twitter;
               default:
                 return undefined; // In case no matching case is found
             }
