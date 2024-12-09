@@ -21,24 +21,6 @@ export function ProfileSettings({ user }: ProfileSettingsProps) {
     <div className="flex flex-col w-full">
       <h1 className="font-bold text-lg mb-4">Profile Settings</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Required Fields */}
-        <div>
-          <label
-            htmlFor="fullname"
-            className="block text-sm text-gray-400 mb-1"
-          >
-            Full Name
-          </label>
-          <input
-            id="fullname"
-            type="text"
-            required
-            className="block w-full px-3 py-2 bg-gray-900/50 border border-gray-700 rounded-md text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-            value={user.full_name}
-            onChange={(e) => (user.full_name = e.target.value)}
-          />
-        </div>
-
         {/* Avatar Upload */}
         <div>
           <label className="block text-sm text-gray-400 mb-1">

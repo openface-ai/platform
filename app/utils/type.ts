@@ -165,7 +165,6 @@ interface UserProfile {
 
 export interface UserData {
   auth_profile: UserProfile;
-  full_name: string;
   following: string[];
   followers: number;
   interests: string[];

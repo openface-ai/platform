@@ -6,9 +6,13 @@ export const MockUserData = (profile: UserProfile): UserData => {
     auth_profile: profile,
     following: [], // Initialize with an empty array or mock data
     followers: Math.floor(Math.random() * 1000), // Mock random follower count
+    interests: ["Computer Vision", "NLP"],
     twitter: undefined,
-    facebook: undefined,
+    linkedin: undefined,
     github: undefined,
+    full_name: "John Doe",
+    homepage: "www.google.com",
+    agreedToTerms: true,
   };
 };
 // Accessing and modifying values

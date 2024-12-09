@@ -30,14 +30,19 @@ export function ProfileHeader({ user, activeTab, onTabChange }: ProfileProps) {
               height={100}
             />
 
-            <span className="text-gray-600">|</span>
+            <hr className="h-full border-none bg-gray-600 w-1" />
             <div className="flex flex-col">
               <Link
-                href={`/${user.auth_profile.name}`}
+                href={`/${user.auth_profile.sub}`}
                 className="text-gray-400 hover:text-gray-300 hover:underline"
               >
                 {user.auth_profile.name}
               </Link>
+              {user.auth_profile.email && (
+                <span className="text-xs text-gray-500">
+                  {user.auth_profile.email}
+                </span>
+              )}
             </div>
           </div>
         </div>
