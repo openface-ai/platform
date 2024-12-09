@@ -64,8 +64,8 @@ export default function ProfilePage() {
               onTabChange={setActiveTab}
             />
           </div>
-          <div className="flex-1 bg-gray-900">
-            <div className="max-w-7xl m-7">{renderTabContent()}</div>
+          <div className="flex-1 bg-gray-900 ">
+            <div className="m-7">{renderTabContent()}</div>
           </div>
         </div>
       )}

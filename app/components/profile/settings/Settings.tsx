@@ -23,9 +23,9 @@ export function Settings({ user, activeTab, onTabChange }: SettingsProps) {
   };
 
   return (
-    <div className="flex lg:flex-row flex-col">
+    <div className="flex lg:flex-row flex-col justify-center">
       <SettingsTabs activeTab={activeTab} onTabChange={onTabChange} />
-      <div className="flex flex-grow m-7">{renderTabContent()}</div>
+      <div className="flex flex-grow m-7 max-w-7xl ">{renderTabContent()}</div>
     </div>
   );
 }

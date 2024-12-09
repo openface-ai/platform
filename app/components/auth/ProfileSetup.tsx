@@ -11,7 +11,7 @@ type ProfileData = {
   username: string;
   fullName: string;
   avatar?: File;
-  x: string;
+  twitter: string;
   github: string;
   linkedin: string;
   homepage: string;

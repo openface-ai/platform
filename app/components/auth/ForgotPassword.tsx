@@ -1,24 +1,24 @@
 // components/auth/ForgotPassword.tsx
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 // import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { AuthCard } from './AuthCard';
-import { MailIcon, ArrowLeftIcon } from 'lucide-react';
+import Link from "next/link";
+import { AuthCard } from "./AuthCard";
+import { MailIcon, ArrowLeftIcon } from "lucide-react";
 
 export default function ForgotPassword() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsSubmitted(true);
     } finally {
       setIsLoading(false);
@@ -32,9 +32,12 @@ export default function ForgotPassword() {
           <div className="p-6">
             <div className="flex flex-col items-center mb-6">
               <div className="text-3xl mb-2">😮</div>
-              <h2 className="text-xl font-semibold text-gray-200">Check your email</h2>
+              <h2 className="text-xl font-semibold text-gray-200">
+                Check your email
+              </h2>
               <p className="text-gray-400 text-sm mt-1 text-center">
-                We sent recovery instructions to<br />
+                We sent recovery instructions to
+                <br />
                 <span className="text-gray-200">{email}</span>
               </p>
             </div>
@@ -46,8 +49,8 @@ export default function ForgotPassword() {
               >
                 Back to reset password
               </button>
-              
-              <Link 
+
+              <Link
                 href="/signin"
                 className="block w-full py-2 px-4 border border-gray-700 text-center rounded-md text-gray-400 hover:bg-gray-800 transition-colors"
               >
@@ -66,7 +69,9 @@ export default function ForgotPassword() {
         <div className="p-6">
           <div className="flex flex-col items-center mb-6">
             <div className="text-3xl mb-2">😮</div>
-            <h2 className="text-xl font-semibold text-gray-200">Reset your password</h2>
+            <h2 className="text-xl font-semibold text-gray-200">
+              Reset your password
+            </h2>
             <p className="text-gray-400 text-sm mt-1">
               Enter your email to receive recovery instructions
             </p>
@@ -74,7 +79,10 @@ export default function ForgotPassword() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm text-gray-400 mb-1">
+              <label
+                htmlFor="email"
+                className="block text-sm text-gray-400 mb-1"
+              >
                 Email Address
               </label>
               <div className="relative">
@@ -97,12 +105,12 @@ export default function ForgotPassword() {
               disabled={isLoading}
               className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors disabled:opacity-50"
             >
-              {isLoading ? 'Sending...' : 'Send recovery instructions'}
+              {isLoading ? "Sending..." : "Send recovery instructions"}
             </button>
           </form>
 
           <div className="mt-4">
-            <Link 
+            <Link
               href="/signin"
               className="inline-flex items-center text-sm text-gray-400 hover:text-gray-300"
             >
