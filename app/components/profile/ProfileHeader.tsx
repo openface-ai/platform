@@ -14,14 +14,23 @@ import {
   Microscope,
   TwitterIcon,
 } from "lucide-react";
+import Button from "../ui/Button";
 
 interface ProfileProps {
   user: UserData;
   activeTab: ProfileTab;
   onTabChange: (tab: ProfileTab) => void;
+  onFollowersClick: () => void;
+  onFollowingClick: () => void;
 }
 
-export function ProfileHeader({ user, activeTab, onTabChange }: ProfileProps) {
+export function ProfileHeader({
+  user,
+  activeTab,
+  onTabChange,
+  onFollowersClick,
+  onFollowingClick,
+}: ProfileProps) {
   const renderSocials = () => {
     const socials = [
       { id: "homepage" as const, label: "Homepage", icon: Home },
@@ -49,7 +58,7 @@ export function ProfileHeader({ user, activeTab, onTabChange }: ProfileProps) {
           if (social) {
             return (
               <Link
-                className="flex text-gray-600 items-center gap-2 px-4 py-2 text-xs hover:text-gray-50"
+                className="flex text-gray-600 items-center gap-2 p-2 text-xs hover:text-gray-50"
                 key={id}
                 href={
                   id == "homepage" ? social : `https://www.${id}.com/${social}`
@@ -92,6 +101,7 @@ export function ProfileHeader({ user, activeTab, onTabChange }: ProfileProps) {
     <div className="border-b border-gray-800 mx-7">
       <div className="flex lg:flex-row flex-col justify-between max-w-7xl mx-auto p-4">
         <div className="flex flex-col items-start justify-between">
+          {/* User Image + Name + Email */}
           <div className="flex items-center gap-2 p-2">
             <Image
               src={userImgSrc}
@@ -114,31 +124,51 @@ export function ProfileHeader({ user, activeTab, onTabChange }: ProfileProps) {
               )}
             </div>
           </div>
+
+          {/* Followers/Following */}
+          <div className="flex flex-row text-xs gap-x-2 px-2">
+            <button onClick={onFollowersClick}>
+              <span className="font-bold text-gray-200">{user.followers}</span>
+              <span className="text-gray-500 ml-1">Followers</span>
+            </button>
+            <button onClick={onFollowingClick}>
+              <span className="font-bold text-gray-200">
+                {user.following.length}
+              </span>
+              <span className="text-gray-500 ml-1">Following</span>
+            </button>
+          </div>
+
+          {/* Socials */}
           {renderSocials()}
         </div>
-        <div className="flex lg:flex-row flex-col justify-around">
+
+        {/* Interests/Orgs/Activity */}
+        <div className="flex lg:flex-row flex-col justify-around ">
           <div className="m-2">
-            <span className="flex flex-row m-2">
+            <span className="flex flex-row ">
               <Microscope size={20} className="mr-2" />
               Ai & ML Interests
             </span>
             {renderStringList(user.interests)}
           </div>
-          <div className="m-2">
-            <span className="flex flex-row m-2">
+          <div className="m-2 align-top">
+            <span className="flex flex-row ">
               <Building size={20} className="mr-2" />
               Organizations
             </span>
             {renderStringList(user.organizations)}
           </div>
           <div className="m-2">
-            <span className="flex flex-row m-2">
+            <span className="flex flex-row ">
               <Activity size={20} className="mr-2" />
               Recent Activity
             </span>
           </div>
         </div>
       </div>
+
+      {/* Navigation Tabs */}
       <ProfileTabs activeTab={activeTab} onTabChange={onTabChange} />
     </div>
   );

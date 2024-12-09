@@ -36,6 +36,14 @@ export default function ProfilePage() {
   // https://community.auth0.com/t/how-to-get-user-id-of-a-user-after-login-in-react-hook-useauth0/53309
   const userData: UserData = MockUserData(user);
 
+  const onFollowingClick = () => {
+    //
+  };
+
+  const onFollowersClick = () => {
+    //
+  };
+
   const renderTabContent = () => {
     switch (activeTab) {
       case "dashboard":
@@ -62,6 +70,8 @@ export default function ProfilePage() {
               user={userData}
               activeTab={activeTab}
               onTabChange={setActiveTab}
+              onFollowingClick={onFollowingClick}
+              onFollowersClick={onFollowersClick}
             />
           </div>
           <div className="flex-1 bg-gray-900 ">
