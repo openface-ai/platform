@@ -7,21 +7,27 @@ import { useEffect, useState } from "react";
 import { ProfileDashboard } from "../components/profile/ProfileDashboard";
 import { Settings } from "../components/profile/settings/Settings";
 import { useRouter } from "next/navigation";
-import { ProfileTab, UserData } from "../utils/type";
+import { ProfileTab, UserProfileData } from "../utils/type";
 import { SettingsTab } from "../components/profile/settings/SettingsTabs";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState<ProfileTab>("dashboard");
   const [activeSettingsTab, setActiveSettingsTab] =
     useState<SettingsTab>("profile");
   const router = useRouter();
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [userData, setUserData] = useState<UserProfileData | null>(null);
+  const { user } = useUser();
 
   useEffect(() => {
+    if (!user) {
+      router.push("/");
+      return;
+    }
     // Retrieve user data from sessionStorage
     const cachedUserData = sessionStorage.getItem("userData");
     if (cachedUserData) {
-      const data: UserData = JSON.parse(cachedUserData);
+      const data: UserProfileData = JSON.parse(cachedUserData);
       setUserData(data);
     } else {
       router.push("/"); // Redirect to login page or another route

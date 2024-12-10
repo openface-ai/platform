@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { UserProfile } from "@auth0/nextjs-auth0/client";
 import { useState, useRef, useEffect } from "react";
 import { UserProfileData } from "@/app/utils/type";
-import { UserNotPresent } from "@/app/api/users/[username]/route";
 import LoadingSpinner from "../ui/LoadingSpinner";
 
 interface AuthButtonProps {

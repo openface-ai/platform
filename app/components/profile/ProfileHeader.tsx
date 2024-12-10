@@ -1,10 +1,8 @@
 "use client";
-
-import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 import Image from "next/image";
 import { ProfileTabs } from "./ProfileTabs";
-import { ProfileTab, UserData, UserStats } from "@/app/utils/type";
+import { ProfileTab, UserStats } from "@/app/utils/type";
 import {
   Activity,
   Building,

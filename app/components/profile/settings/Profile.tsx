@@ -1,15 +1,16 @@
-import { UserData } from "@/app/utils/type";
+import { UserProfileData } from "@/app/utils/type";
 import Link from "next/link";
 import { GithubIcon, TwitterIcon, LinkedinIcon, ImageIcon } from "lucide-react";
 import { useState } from "react";
 import Button from "../../ui/Button";
 
 interface ProfileSettingsProps {
-  user: UserData;
+  user: UserProfileData;
 }
 
 export function ProfileSettings({ user }: ProfileSettingsProps) {
   const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // setIsLoading(true);
@@ -17,6 +18,7 @@ export function ProfileSettings({ user }: ProfileSettingsProps) {
     // console.log("Creating profile with:", formData);
     // router.push("/dashboard");
   };
+
   return (
     <div className="flex flex-col w-full">
       <h1 className="font-bold text-lg mb-4">Profile Settings</h1>
