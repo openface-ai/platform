@@ -12,6 +12,12 @@ const saveProfileToDatabase = async (
   const provider = profile.sub ? profile.sub.split("|")[0] : "";
   // user.sub is auth0's id for users
   // https://community.auth0.com/t/how-to-get-user-id-of-a-user-after-login-in-react-hook-useauth0/53309
+  const githubUsername =
+    provider == "github"
+      ? profile.nickname
+        ? profile.nickname
+        : undefined
+      : undefined;
 
   const defaultAvatar =
     "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg";
@@ -29,12 +35,7 @@ const saveProfileToDatabase = async (
     organizations: [],
     twitter: undefined,
     linkedin: undefined,
-    github:
-      provider == "github"
-        ? profile.nickname
-          ? profile.nickname
-          : undefined
-        : undefined,
+    github: githubUsername,
     homepage: "https://www.google.com",
     agreedToTerms: true,
   };
