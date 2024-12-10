@@ -1,37 +1,39 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { ProfileTabs } from "./ProfileTabs";
-import { ProfileTab, UserStats } from "@/app/utils/type";
+import { UserProfileData, UserStats } from "@/app/utils/type";
 import {
-  Activity,
-  Building,
   GithubIcon,
   Home,
   LinkedinIcon,
-  Microscope,
+  Settings,
   TwitterIcon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import { useRouter } from "next/navigation";
 
-interface ProfileProps {
-  user: UserData;
-  activeTab: ProfileTab;
-  onTabChange: (tab: ProfileTab) => void;
-  onFollowersClick: () => void;
-  onFollowingClick: () => void;
+interface ProfileHeaderProps {
+  user: UserProfileData;
+  // onFollowersClick: () => void;
+  // onFollowingClick: () => void;
 }
 
 export function ProfileHeader({
   user,
-  activeTab,
-  onTabChange,
-  onFollowersClick,
-  onFollowingClick,
-}: ProfileProps) {
+  // onFollowersClick,
+  // onFollowingClick,
+}: ProfileHeaderProps) {
   const [userStats, setUserStats] = useState<UserStats | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+
+  const handleSettingsClick = () => {
+    router.push("/settings");
+  };
+
+  const onFollowersClick = () => {};
+  const onFollowingClick = () => {};
 
   const renderSocials = () => {
     const socials = [
@@ -40,6 +42,7 @@ export function ProfileHeader({
       { id: "github" as const, label: "GitHub", icon: GithubIcon },
       { id: "twitter" as const, label: "Twitter", icon: TwitterIcon },
     ];
+
     return (
       <div className="flex flex-row">
         {socials.map(({ id, label, icon: Icon }) => {
@@ -79,26 +82,12 @@ export function ProfileHeader({
     );
   };
 
-  const renderStringList = (list: string[]) => {
-    if (list.length === 0) {
-      return <div className="text-gray-500 text-xs px-5">None yet</div>;
-    }
-
-    return (
-      <div className="flex flex-col gap-2 px-5">
-        {list.map((str, index) => (
-          <div key={index} className="flex items-center text-gray-500 text-xs">
-            <span>{str}</span>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
   useEffect(() => {
     const fetchUserStats = async () => {
       try {
-        const response = await fetch(`/api/users/${user.name}/stats`);
+        const response = await fetch(
+          `/api/users/${user.sub_token_claim}/stats`,
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch user profile");
@@ -123,39 +112,49 @@ export function ProfileHeader({
     return <div>Error: {error}</div>;
   }
 
-  const userImgSrc =
-    user.avatar ||
-    "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg";
-
   return (
-    <div className="border-b border-gray-800 mx-7">
-      <div className="flex lg:flex-row flex-col justify-between max-w-7xl mx-auto p-4">
-        <div className="flex flex-col items-start justify-between">
-          {/* User Image + Name + Email */}
-          <div className="flex items-center gap-2 p-2">
-            <Image
-              src={userImgSrc}
-              alt="User Profile"
-              className="rounded-3xl align-text-bottom"
-              width={100}
-              height={100}
-            />
-
-            <hr className="h-full border-none bg-gray-600 w-1/2" />
-            <div className="flex flex-col">
-              <Link
-                href={`/${user.username}`}
-                className="text-gray-400 hover:text-gray-300 hover:underline"
-              >
-                {user.username}
-              </Link>
-              {user.email && (
-                <span className="text-xs text-gray-500">{user.email}</span>
-              )}
-            </div>
+    <div className="bg-gray-900 rounded-lg p-6 mb-4">
+      <div className="flex flex-col md:flex-row items-center gap-6">
+        <div className="flex items-center gap-4">
+          <Image
+            src={user.avatar}
+            alt="User avatar"
+            width={64}
+            height={64}
+            className="rounded-full object-cover"
+          />
+          <div>
+            <h1 className="text-2xl font-bold">
+              Welcome back, {user.username}!
+            </h1>
+            <p className="text-gray-400">Member since {user.joinedAt}</p>
           </div>
+        </div>
+        <div className="flex gap-8 ml-auto">
+          <div className="text-center">
+            <p className="text-2xl font-bold">12</p>
+            <p className="text-sm text-gray-400">Models</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold">5</p>
+            <p className="text-sm text-gray-400">Datasets</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold">1.2k</p>
+            <p className="text-sm text-gray-400">Likes</p>
+          </div>
+        </div>
+      </div>
 
-          {/* Followers/Following */}
+      <div className="flex flex-row w-full mt-4">
+        <button
+          onClick={handleSettingsClick}
+          className="p-2 rounded-full text-sm text-gray-300 hover:bg-gray-800 flex items-center gap-2"
+        >
+          <Settings className="w-4 h-4" />
+        </button>
+        {/* Followers/Following */}
+        <div className="flex w-full flex-row justify-between ">
           {userStats ? (
             <div className="flex flex-row text-xs gap-x-2 px-2">
               <button onClick={onFollowersClick}>
@@ -175,37 +174,9 @@ export function ProfileHeader({
             <LoadingSpinner />
           )}
 
-          {/* Socials */}
           {renderSocials()}
         </div>
-
-        {/* Interests/Orgs/Activity */}
-        <div className="flex lg:flex-row flex-col justify-around ">
-          <div className="m-2">
-            <span className="flex flex-row">
-              <Microscope size={20} className="mr-2" />
-              Ai & ML Interests
-            </span>
-            {renderStringList(user.interests)}
-          </div>
-          <div className="m-2 align-top">
-            <span className="flex flex-row">
-              <Building size={20} className="mr-2" />
-              Organizations
-            </span>
-            {renderStringList(user.organizations)}
-          </div>
-          <div className="m-2">
-            <span className="flex flex-row">
-              <Activity size={20} className="mr-2" />
-              Recent Activity
-            </span>
-          </div>
-        </div>
       </div>
-
-      {/* Navigation Tabs */}
-      <ProfileTabs activeTab={activeTab} onTabChange={onTabChange} />
     </div>
   );
 }

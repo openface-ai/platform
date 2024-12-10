@@ -1,3 +1,4 @@
+import { UserProfileData } from "@/app/utils/type";
 import { NextResponse } from "next/server";
 
 export async function GET(

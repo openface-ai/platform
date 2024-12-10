@@ -13,13 +13,19 @@ const saveProfileToDatabase = async (
   // user.sub is auth0's id for users
   // https://community.auth0.com/t/how-to-get-user-id-of-a-user-after-login-in-react-hook-useauth0/53309
 
+  const defaultAvatar =
+    "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg";
+
   return {
     sub_token_claim: profile.sub ? profile.sub : "",
     fullname: profile.name ? profile.name : "",
     username: profile.nickname ? profile.nickname : "",
-    avatar: profile.picture ? profile.picture : undefined,
+    avatar: profile.picture ? profile.picture : defaultAvatar,
     email: profile.email ? profile.email : undefined,
     interests: ["Computer Vision", "NLP"],
+    joinedAt: profile.updated_at
+      ? profile.updated_at
+      : new Date().toISOString(),
     organizations: [],
     twitter: undefined,
     linkedin: undefined,

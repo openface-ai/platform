@@ -1,7 +1,7 @@
-import { UserData } from "@/app/utils/type";
+import { UserProfileData } from "@/app/utils/type";
 
 interface OrganizationsSettingsProps {
-  user: UserData;
+  user: UserProfileData;
 }
 
 export function OrganizationsSettings({ user }: OrganizationsSettingsProps) {

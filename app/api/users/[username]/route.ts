@@ -20,7 +20,7 @@ export async function GET(
   } else {
     return NextResponse.json({
       status: "ok",
-      data: null, // No user profile found
+      data: null,
     });
   }
 }

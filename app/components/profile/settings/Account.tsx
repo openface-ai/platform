@@ -1,10 +1,10 @@
-import { UserData } from "@/app/utils/type";
+import { UserProfileData } from "@/app/utils/type";
 import { useState } from "react";
 import { Mail } from "lucide-react";
 import Button from "../../ui/Button";
 
 interface AccountSettingsProps {
-  user: UserData;
+  user: UserProfileData;
 }
 
 export function AccountSettings({ user }: AccountSettingsProps) {

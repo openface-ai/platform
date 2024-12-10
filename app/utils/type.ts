@@ -146,6 +146,23 @@ export interface MockDataStructure {
 
 //types/profile.tsx
 export type ProfileTab = "settings" | "dashboard";
+
+export interface UserProfileData {
+  sub_token_claim: string;
+  username: string;
+  avatar: string;
+  fullname?: string;
+  email?: string;
+  interests: string[];
+  organizations: string[];
+  twitter?: string;
+  github?: string;
+  linkedin?: string;
+  homepage?: string;
+  agreedToTerms: boolean;
+  joinedAt: string;
+}
+
 /*
    0AUTH provides the following interface: 
 interface UserProfile {
@@ -159,27 +176,36 @@ interface UserProfile {
   org_id?: string | null;
   [key: string]: unknown; // Any custom claim which could be in the profile
 } 
-
   We can use the sub field to index our own user information on our backend
 */
-
-export interface UserProfileData {
-  sub_token_claim: string;
-  // stats: UserStats;
-  username: string;
-  avatar?: string;
-  fullname?: string;
-  email?: string;
-  interests: string[];
-  organizations: string[];
-  twitter?: string;
-  github?: string;
-  linkedin?: string;
-  homepage?: string;
-  agreedToTerms: boolean;
-}
 
 export interface UserStats {
   following: string[];
   followers: number;
+  onFollowersClick: () => void;
+  onFollowingClick: () => void;
+}
+
+export interface ProfileContext {
+  userData: UserProfileData;
+  activities: ActivityItem[];
+  repositories: {
+    models: RepositoryStats[];
+    datasets: Repository[];
+  };
+  isLoading: boolean;
+  error?: Error;
+}
+
+interface ActivityItem {
+  type: "update" | "like" | "create" | "fork";
+  timestamp: Date;
+  resourceType: "model" | "dataset" | "post";
+  resourceName: string;
+  resourceUrl: string;
+}
+
+interface ActivityFeedProps {
+  items: ActivityItem[];
+  limit?: number;
 }

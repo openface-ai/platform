@@ -2,18 +2,34 @@
 
 import { useState } from "react";
 import Link from "next/link";
-// import { useRouter } from "next/navigation";
 import { MenuIcon, XIcon } from "lucide-react";
-// import Button from "../ui/Button";
-// import { useAuth } from "@/app/hooks/useAuth";
-// import UserMenu from "./UserMenu";
-import AuthButton from "../auth/AuthButton";
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { useAuth } from "@/app/hooks/useAuth";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import UserMenu from "./UserMenu";
+import Button from "../ui/Button";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, isLoading } = useUser();
+  const { user, isLoading, signOut, signIn } = useAuth();
+
+  const renderUserMenu = () => {
+    if (!isLoading && user) {
+      return (
+        <UserMenu
+          user={{ name: user.username, avatar: user.avatar }}
+          onSignOut={signOut}
+        />
+      );
+    } else if (!isLoading && !user) {
+      return (
+        <Button variant="primary" onClick={signIn}>
+          Login
+        </Button>
+      );
+    } else {
+      return <LoadingSpinner />;
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-gray-800">
@@ -46,7 +62,7 @@ export default function NavBar() {
             >
               Community
             </Link>
-            {isLoading ? <LoadingSpinner /> : <AuthButton user={user} />}
+            {renderUserMenu()}
           </div>
 
           {/* Mobile menu button */}
@@ -84,9 +100,7 @@ export default function NavBar() {
               >
                 Community
               </Link>
-              <div className="pt-2">
-                {isLoading ? <LoadingSpinner /> : <AuthButton user={user} />}
-              </div>
+              <div className="pt-2">{renderUserMenu()}</div>
             </div>
           </div>
         )}

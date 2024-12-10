@@ -1,5 +1,6 @@
 import { UserProfileData } from "@/app/utils/type";
 import { useEffect, useState } from "react";
+import { ActivityView } from "./activity/Activity";
 
 interface ProfileDashboardProps {
   user: UserProfileData;
@@ -50,5 +51,10 @@ export function ProfileDashboard({ user }: ProfileDashboardProps) {
     fetchUserActivities();
   }, []);
 
-  return <div>Dashboard view</div>;
+  return (
+    <div>
+      dashboard
+      <ActivityView />
+    </div>
+  );
 }
