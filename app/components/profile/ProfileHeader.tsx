@@ -105,17 +105,18 @@ export function ProfileHeader({
         }
 
         const data: UserStats = await response.json();
-        console.log(data);
         setUserStats(data);
       } catch (err) {
-        console.log("error: ", err);
+        console.log("error fetching stats: ", err);
         setError("Failed to fetch user stats");
       }
     };
+
     if (userStats) {
       return;
+    } else {
+      fetchUserStats();
     }
-    fetchUserStats();
   });
 
   if (error) {

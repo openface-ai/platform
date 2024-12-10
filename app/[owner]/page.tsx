@@ -17,22 +17,25 @@ export default function ProfilePage() {
     useState<SettingsTab>("profile");
   const router = useRouter();
   const [userData, setUserData] = useState<UserProfileData | null>(null);
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
 
   useEffect(() => {
-    if (!user) {
+    if (!isLoading && !user) {
       router.push("/");
       return;
     }
-    // Retrieve user data from sessionStorage
-    const cachedUserData = sessionStorage.getItem("userData");
-    if (cachedUserData) {
-      const data: UserProfileData = JSON.parse(cachedUserData);
-      setUserData(data);
-    } else {
-      router.push("/"); // Redirect to login page or another route
+
+    if (!userData) {
+      const cachedUserData = sessionStorage.getItem("userData");
+      if (cachedUserData) {
+        const data: UserProfileData = JSON.parse(cachedUserData);
+        setUserData(data);
+      } else {
+        console.log("redirecting");
+        router.push("/");
+      }
     }
-  }, [router]);
+  }, [user, userData, router]);
 
   if (userData == null) {
     return; // should never happen, just appeasing TS

@@ -1,11 +1,11 @@
-import { UserData } from "@/app/utils/type";
+import { UserProfileData } from "@/app/utils/type";
 import { SettingsTab, SettingsTabs } from "./SettingsTabs";
 import { ProfileSettings } from "./Profile";
 import { AccountSettings } from "./Account";
 import { OrganizationsSettings } from "./Organizations";
 
 interface SettingsProps {
-  user: UserData;
+  user: UserProfileData;
   activeTab: SettingsTab;
   onTabChange: (tab: SettingsTab) => void;
 }

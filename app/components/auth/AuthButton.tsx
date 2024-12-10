@@ -21,36 +21,36 @@ export default function AuthButton({ user }: AuthButtonProps) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (user) {
-      const fetchUserProfile = async () => {
-        try {
-          const response = await fetch(`/api/users/${user.name}`);
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch(`/api/users/${user.name}`);
 
-          if (!response.ok) {
-            throw new Error("Failed to fetch user profile");
-          }
-
-          const json = await response.json();
-
-          if (json.data == null) {
-            const body = JSON.stringify(user);
-            const putResponse = await fetch(`/api/users/create`, {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: body,
-            });
-            const data: UserProfileData = await putResponse.json();
-            setUserProfile(data);
-          }
-        } catch (err) {
-          console.log("error: ", err);
-          setError("Failed to fetch user profile");
-        } finally {
-          setIsLoading(false);
+        if (!response.ok) {
+          throw new Error("Failed to fetch user profile");
         }
-      };
+
+        const json = await response.json();
+
+        if (json.data == null) {
+          const body = JSON.stringify(user);
+          const putResponse = await fetch(`/api/users/create`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: body,
+          });
+          const data: UserProfileData = await putResponse.json();
+          setUserProfile(data);
+        }
+      } catch (err) {
+        console.log("error: ", err);
+        setError("Failed to fetch user profile");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    if (user && !userProfile) {
       fetchUserProfile();
     } else {
       setIsLoading(false);
@@ -69,10 +69,13 @@ export default function AuthButton({ user }: AuthButtonProps) {
 
     document.addEventListener("mousedown", handleClickOutside);
 
+    if (userProfile) {
+      sessionStorage.setItem("userData", JSON.stringify(userProfile));
+    }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [user]);
+  }, [user, userProfile]);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -96,10 +99,6 @@ export default function AuthButton({ user }: AuthButtonProps) {
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
-
-  if (userProfile) {
-    sessionStorage.setItem("userData", JSON.stringify(userProfile));
-  }
 
   return (
     <div className="relative">
