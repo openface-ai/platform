@@ -163,14 +163,13 @@ interface UserProfile {
   We can use the sub field to index our own user information on our backend
 */
 
-export interface UserData {
+export interface UserProfileData {
   sub_token_claim: string;
+  // stats: UserStats;
   username: string;
   avatar?: string;
   fullname?: string;
   email?: string;
-  following: string[];
-  followers: number;
   interests: string[];
   organizations: string[];
   twitter?: string;
@@ -178,4 +177,9 @@ export interface UserData {
   linkedin?: string;
   homepage?: string;
   agreedToTerms: boolean;
+}
+
+export interface UserStats {
+  following: string[];
+  followers: number;
 }

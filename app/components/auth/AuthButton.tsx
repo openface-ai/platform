@@ -1,21 +1,92 @@
 import Image from "next/image";
 import Button from "../ui/Button";
 import { useRouter } from "next/navigation";
-import { UserProfile, useUser } from "@auth0/nextjs-auth0/client";
+import { UserProfile } from "@auth0/nextjs-auth0/client";
 import { useState, useRef, useEffect } from "react";
+import { UserProfileData } from "@/app/utils/type";
+import { UserNotPresent } from "@/app/api/users/[username]/route";
 import LoadingSpinner from "../ui/LoadingSpinner";
-import { MockUserData } from "@/app/data/users";
 
-export default function AuthButton() {
-  const { user, isLoading } = useUser();
+interface AuthButtonProps {
+  user?: UserProfile;
+}
+
+export default function AuthButton({ user }: AuthButtonProps) {
   const router = useRouter();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownTriggerRef = useRef(null);
   const dropdownMenuRef = useRef(null);
 
-  const userData = user ? MockUserData(user) : undefined;
+  const [userProfile, setUserProfile] = useState<UserProfileData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (user) {
+      const fetchUserProfile = async () => {
+        try {
+          const response = await fetch(`/api/users/${user.name}`);
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch user profile");
+          }
+
+          const json = await response.json();
+
+          if (json.data == null) {
+            const body = JSON.stringify(user);
+            const putResponse = await fetch(`/api/users/create`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: body,
+            });
+            const data: UserProfileData = await putResponse.json();
+            setUserProfile(data);
+          }
+        } catch (err) {
+          console.log("error: ", err);
+          setError("Failed to fetch user profile");
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchUserProfile();
+    } else {
+      setIsLoading(false);
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownTriggerRef.current &&
+        !dropdownTriggerRef.current.contains(event.target) &&
+        dropdownMenuRef.current &&
+        !dropdownMenuRef.current.contains(event.target)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [user]);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   const logout = () => {
     setShowDropdown(false);
+    sessionStorage.removeItem("userData");
+    // should add returnTo to clear session
     router.push("/api/auth/logout");
   };
 
@@ -27,29 +98,13 @@ export default function AuthButton() {
     setShowDropdown(!showDropdown);
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      dropdownTriggerRef.current &&
-      !dropdownTriggerRef.current.contains(event.target) &&
-      dropdownMenuRef.current &&
-      !dropdownMenuRef.current.contains(event.target)
-    ) {
-      setShowDropdown(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  if (userProfile) {
+    sessionStorage.setItem("userData", JSON.stringify(userProfile));
+  }
 
   return (
     <div className="relative">
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : userData ? (
+      {userProfile ? (
         <div className="relative">
           <Image
             src={userImgSrc}
@@ -68,7 +123,7 @@ export default function AuthButton() {
               <div className="py-1 text-gray-700">
                 <button
                   className="block w-full px-4 py-2 text-left hover:bg-gray-100"
-                  onClick={() => router.push(`/${userData.username}`)}
+                  onClick={() => router.push(`/${userProfile.username}`)}
                 >
                   Profile
                 </button>

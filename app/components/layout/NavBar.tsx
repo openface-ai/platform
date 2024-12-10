@@ -8,16 +8,12 @@ import { MenuIcon, XIcon } from "lucide-react";
 // import { useAuth } from "@/app/hooks/useAuth";
 // import UserMenu from "./UserMenu";
 import AuthButton from "../auth/AuthButton";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const router = useRouter();
-  // const { user, signOut } = useAuth();
-
-  // const handleSignOut = () => {
-  //   signOut();
-  //   router.push("/");
-  // };
+  const { user, isLoading } = useUser();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-gray-800">
@@ -50,7 +46,7 @@ export default function NavBar() {
             >
               Community
             </Link>
-            <AuthButton />
+            {isLoading ? <LoadingSpinner /> : <AuthButton user={user} />}
           </div>
 
           {/* Mobile menu button */}
@@ -89,7 +85,7 @@ export default function NavBar() {
                 Community
               </Link>
               <div className="pt-2">
-                <AuthButton />
+                {isLoading ? <LoadingSpinner /> : <AuthButton user={user} />}
               </div>
             </div>
           </div>

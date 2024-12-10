@@ -4,7 +4,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 import Image from "next/image";
 import { ProfileTabs } from "./ProfileTabs";
-import { ProfileTab, UserData } from "@/app/utils/type";
+import { ProfileTab, UserData, UserStats } from "@/app/utils/type";
 import {
   Activity,
   Building,
@@ -14,7 +14,8 @@ import {
   Microscope,
   TwitterIcon,
 } from "lucide-react";
-import Button from "../ui/Button";
+import { useEffect, useState } from "react";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 interface ProfileProps {
   user: UserData;
@@ -31,6 +32,9 @@ export function ProfileHeader({
   onFollowersClick,
   onFollowingClick,
 }: ProfileProps) {
+  const [userStats, setUserStats] = useState<UserStats | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
   const renderSocials = () => {
     const socials = [
       { id: "homepage" as const, label: "Homepage", icon: Home },
@@ -93,6 +97,33 @@ export function ProfileHeader({
     );
   };
 
+  useEffect(() => {
+    const fetchUserStats = async () => {
+      try {
+        const response = await fetch(`/api/users/${user.name}/stats`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user profile");
+        }
+
+        const data: UserStats = await response.json();
+        console.log(data);
+        setUserStats(data);
+      } catch (err) {
+        console.log("error: ", err);
+        setError("Failed to fetch user stats");
+      }
+    };
+    if (userStats) {
+      return;
+    }
+    fetchUserStats();
+  });
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   const userImgSrc =
     user.avatar ||
     "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg";
@@ -126,18 +157,24 @@ export function ProfileHeader({
           </div>
 
           {/* Followers/Following */}
-          <div className="flex flex-row text-xs gap-x-2 px-2">
-            <button onClick={onFollowersClick}>
-              <span className="font-bold text-gray-200">{user.followers}</span>
-              <span className="text-gray-500 ml-1">Followers</span>
-            </button>
-            <button onClick={onFollowingClick}>
-              <span className="font-bold text-gray-200">
-                {user.following.length}
-              </span>
-              <span className="text-gray-500 ml-1">Following</span>
-            </button>
-          </div>
+          {userStats ? (
+            <div className="flex flex-row text-xs gap-x-2 px-2">
+              <button onClick={onFollowersClick}>
+                <span className="font-bold text-gray-200">
+                  {userStats.followers}
+                </span>
+                <span className="text-gray-500 ml-1">Followers</span>
+              </button>
+              <button onClick={onFollowingClick}>
+                <span className="font-bold text-gray-200">
+                  {userStats.following.length}
+                </span>
+                <span className="text-gray-500 ml-1">Following</span>
+              </button>
+            </div>
+          ) : (
+            <LoadingSpinner />
+          )}
 
           {/* Socials */}
           {renderSocials()}
@@ -146,21 +183,21 @@ export function ProfileHeader({
         {/* Interests/Orgs/Activity */}
         <div className="flex lg:flex-row flex-col justify-around ">
           <div className="m-2">
-            <span className="flex flex-row ">
+            <span className="flex flex-row">
               <Microscope size={20} className="mr-2" />
               Ai & ML Interests
             </span>
             {renderStringList(user.interests)}
           </div>
           <div className="m-2 align-top">
-            <span className="flex flex-row ">
+            <span className="flex flex-row">
               <Building size={20} className="mr-2" />
               Organizations
             </span>
             {renderStringList(user.organizations)}
           </div>
           <div className="m-2">
-            <span className="flex flex-row ">
+            <span className="flex flex-row">
               <Activity size={20} className="mr-2" />
               Recent Activity
             </span>
