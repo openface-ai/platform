@@ -13,9 +13,9 @@ export function ProfileSettings({ user }: ProfileSettingsProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // setIsLoading(true);
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
-    // console.log("Creating profile with:", formData);
+    setIsLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setIsLoading(false);
     // router.push("/dashboard");
   };
 

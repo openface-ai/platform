@@ -2,7 +2,7 @@
 "use client";
 
 import { ProfileTab } from "@/app/utils/type";
-import { LayoutGrid, Users, Settings } from "lucide-react";
+import { LayoutGrid, Settings } from "lucide-react";
 
 interface ProfileTabsProps {
   activeTab: ProfileTab;

@@ -1,8 +1,7 @@
-import { UserProfileData } from "@/app/utils/type";
 import { NextResponse } from "next/server";
 
 export async function GET(
-  request: Request,
+  _request: Request,
   { params }: { params: { username: string } },
 ) {
   const { username } = params;

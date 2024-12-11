@@ -182,30 +182,4 @@ interface UserProfile {
 export interface UserStats {
   following: string[];
   followers: number;
-  onFollowersClick: () => void;
-  onFollowingClick: () => void;
-}
-
-export interface ProfileContext {
-  userData: UserProfileData;
-  activities: ActivityItem[];
-  repositories: {
-    models: RepositoryStats[];
-    datasets: Repository[];
-  };
-  isLoading: boolean;
-  error?: Error;
-}
-
-interface ActivityItem {
-  type: "update" | "like" | "create" | "fork";
-  timestamp: Date;
-  resourceType: "model" | "dataset" | "post";
-  resourceName: string;
-  resourceUrl: string;
-}
-
-interface ActivityFeedProps {
-  items: ActivityItem[];
-  limit?: number;
 }
