@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 
 export async function GET(
-  request: Request,
-  { params }: { params: { username: string } },
+  req: Request,
+  context: any
 ) {
-  const { username } = params;
+  const { username } = context.params;
   console.log("getting: ", username);
 
-  // do some work to get userProfile from a databse
+  // do some work to get userProfile from a database
   const userProfile = null;
 
   if (userProfile) {

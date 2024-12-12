@@ -1,3 +1,4 @@
+
 export type Model = {
   id: string;
   name: string;
@@ -151,6 +152,7 @@ export interface UserProfileData {
   avatar: string;
   fullname?: string;
   email?: string;
+  stats?: any;
   interests: string[];
   organizations: string[];
   twitter?: string;
@@ -158,7 +160,7 @@ export interface UserProfileData {
   linkedin?: string;
   homepage?: string;
   agreedToTerms: boolean;
-  joinedAt: string;
+  joinedAt?: string;
 }
 
 /*

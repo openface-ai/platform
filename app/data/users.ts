@@ -13,7 +13,7 @@ export const MockUserProfileData = (profile: UserProfile): UserProfileData => {
     sub_token_claim: profile.sub ? profile.sub : "",
     fullname: profile.name ? profile.name : "",
     username: profile.nickname ? profile.nickname : "",
-    avatar: profile.picture ? profile.picture : undefined,
+    avatar: profile.picture ? profile.picture : "",
     email: profile.email ? profile.email : undefined,
     stats: stats,
     interests: ["Computer Vision", "NLP"],
