@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { Settings, LogOut, LayoutDashboard } from 'lucide-react';
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Settings, LogOut, LayoutDashboard } from "lucide-react";
 
 interface UserMenuProps {
   user: {
@@ -25,17 +25,17 @@ export default function UserMenu({ user, onSignOut }: UserMenuProps) {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleDashboardClick = () => {
-    router.push('/dashboard');
+    router.push(`/${user.name}`);
     setIsOpen(false);
   };
 
   const handleSettingsClick = () => {
-    router.push('/settings');
+    router.push("/settings");
     setIsOpen(false);
   };
 
@@ -88,4 +88,4 @@ export default function UserMenu({ user, onSignOut }: UserMenuProps) {
       )}
     </div>
   );
-} 
+}

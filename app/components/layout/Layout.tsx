@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
-import Navbar from './NavBar';
-import Footer from './Footer';
-import Toast from '../ui/Toast';
-import { UIProvider } from '@/app/context/UIContext';
-import { ThemeProvider } from '@/app/context/ThemeContext';
+import { ReactNode } from "react";
+import Navbar from "./NavBar";
+import Footer from "./Footer";
+import Toast from "../ui/Toast";
+import { UIProvider } from "@/app/context/UIContext";
+import { ThemeProvider } from "@/app/context/ThemeContext";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
