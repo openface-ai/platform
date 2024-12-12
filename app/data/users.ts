@@ -1,4 +1,4 @@
-import { UserProfileData, UserStats } from "../utils/type";
+import { UserProfileData } from "../utils/type";
 import { UserProfile } from "@auth0/nextjs-auth0/client";
 
 export const MockUserProfileData = (profile: UserProfile): UserProfileData => {

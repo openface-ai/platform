@@ -1,5 +1,3 @@
-import { UserProfileData } from "@/app/utils/type";
-import { UserProfile } from "@auth0/nextjs-auth0/client";
 import { NextResponse } from "next/server";
 
 export async function GET(

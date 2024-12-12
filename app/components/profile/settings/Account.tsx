@@ -9,7 +9,7 @@ interface AccountSettingsProps {
 
 export function AccountSettings({ user }: AccountSettingsProps) {
   const [isLoading, setIsLoading] = useState(false);
-
+  setIsLoading(false)
   const handleDeleteAccount = () => {};
 
   const handleUsernameEmailSubmit = async (e: React.FormEvent) => {

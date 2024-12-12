@@ -1,5 +1,4 @@
 "use client";
-import { UserProfileData } from "@/app/utils/type";
 import { ProfileSettings } from "../components/profile/settings/Profile";
 import { AccountSettings } from "../components/profile/settings/Account";
 import {
