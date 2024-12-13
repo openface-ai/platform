@@ -55,5 +55,19 @@ export const mockModels: Model[] = [
       category: 'Multimodal',
       task: "Text Generation"
 
-    }
+    },
+    {
+      id: '5',
+      name: 'athena-v1.0-instruct',
+      owner: 'kitsunelynx2',
+      avatar: '/placeholder-avatar.png',
+      description: 'Advanced computer vision model for image recognition and scene understanding.',
+      isPrivate: false,
+      updatedAt: '2 days ago',
+      downloads: 1200,
+      likes: 328,
+      category: 'NLP',
+      task: "Text Generation"
+
+    },
   ];

@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/hooks/useAuth";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { ProfileHeader } from "../profile/ProfileHeader";
+import { mockModels } from "@/app/data/models";
+import { mockDatasets } from "@/app/data/datasets";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("models");
@@ -59,6 +61,9 @@ export default function Dashboard() {
     );
   };
 
+  const userModels = mockModels.filter(model => model.owner === user.username);
+  const userDatasets = mockDatasets.filter(dataset => dataset.owner === user.username);
+
   return (
     <div className="min-h-screen pt-20 px-4">
       <div className="max-w-7xl mx-auto">
@@ -69,7 +74,7 @@ export default function Dashboard() {
           <div className="m-2">
             <span className="flex flex-row">
               <Microscope size={20} className="mr-2" />
-              Ai & ML Interests
+              AI & ML Interests
             </span>
             {renderStringList(user.interests)}
           </div>
@@ -124,9 +129,9 @@ export default function Dashboard() {
 
           {/* Content Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[1, 2, 3, 4].map((item) => (
+            {(activeTab === "models" ? userModels : userDatasets).map((item) => (
               <div
-                key={item}
+                key={item.id}
                 className="group relative bg-gray-950 rounded-lg border border-gray-800"
               >
                 <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -153,21 +158,8 @@ export default function Dashboard() {
                 </div>
                 <Card
                   item={{
-                    id: item.toString(),
-                    name: `Sample ${activeTab === "models" ? "Model" : "Dataset"} ${item}`,
-                    description: "This is a sample description",
-                    category: "Computer Vision",
-                    likes: 100,
-                    owner: "user",
-                    avatar: "/placeholder-avatar.png",
-                    isPrivate: false,
-                    updatedAt: "2 days ago",
-                    downloads: 50,
-                    task: "Text Generation",
-                    ...(activeTab === "datasets" && {
-                      numRows: 1000,
-                      isViewable: true,
-                    }),
+                    ...item,
+                    avatar: user.avatar
                   }}
                   type={activeTab === "models" ? "model" : "dataset"}
                 />

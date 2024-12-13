@@ -79,5 +79,21 @@ export const mockDatasets: Dataset[] = [
       isViewable: true,
       task: "Text Generation"
 
-    }
+    },
+    {
+      id: '6',
+      name: 'OpenAlpaca',
+      owner: 'kitsunelynx2',
+      description: 'Multilingual sentiment analysis dataset covering 50 languages',
+      avatar: '/placeholder-avatar.png',
+      likes: 245,
+      isPrivate: false,
+      updatedAt: '5 days ago',
+      downloads: 8900,
+      category: 'NLP',
+      numRows: 2500000,
+      isViewable: true,
+      task: "Text Generation"
+
+    },
   ];
