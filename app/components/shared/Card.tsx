@@ -1,6 +1,7 @@
 import { Model, Dataset } from '@/app/utils/type';
 import { DownloadIcon, HeartIcon, TableIcon } from 'lucide-react';
 import { useWindowSize } from '@/app/hooks/useWindowSize';
+import { useRouter } from 'next/navigation';
 
 type CardProps = {
   item: Model | Dataset;
@@ -12,9 +13,15 @@ export function Card({ item, type, showDescription = false }: CardProps) {
   const { width } = useWindowSize();
   const isMobile = width < 768;
   const isDataset = type === 'dataset';
+  const router = useRouter();
+  
+  const handleClick = () => {
+    router.push(`/${item.owner}/${item.name}`);
+  };
   
   return (
-    <div className="flex items-center justify-between py-4 border-b border-gray-800 hover:bg-gray-900/50 hover:border-blue-500 transition-all cursor-pointer px-4">
+    <div className="flex items-center justify-between py-4 border-b border-gray-800 hover:bg-gray-900/50 hover:border-blue-500 transition-all cursor-pointer px-4"
+    onClick={handleClick}>
       <div className="flex items-center gap-3 w-full">
         <img 
           src={item.avatar}
