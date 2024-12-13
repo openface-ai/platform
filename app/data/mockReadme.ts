@@ -1,23 +1,5 @@
 export const mockReadme = {
-  "default": `# Default Model
-
-## Description
-This is a default model description.
-
-## Details
-- **Owner:** defaultOwner
-- **Category:** General
-- **Task:** General Task
-- **Downloads:** 100
-- **Likes:** 10
-
-## Usage
-\`\`\`python
-# Example code for using this model
-print("Hello, World!")
-\`\`\`
-`,
-  "ruliad/deepthought": `# DeepThought 8B Llama
+  "default": `# Model Name
 
 This is a fine-tuned version of Llama-2 focused on deep reasoning and analysis.
 

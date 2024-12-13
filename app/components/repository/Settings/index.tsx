@@ -111,7 +111,7 @@ export function Settings({ owner, repo, isPrivate: initialIsPrivate, hasDiscussi
               When enabled, users must share their contact information (email and username) and agree to your terms and conditions (if any) in order to access this model. You can download the list of users who have accepted and had access at any time.
             </p>
           </div>
-          <Button variant="outline">Enable Access requests</Button>
+          <Button variant="outline">Enable</Button>
         </div>
       </section>
 
@@ -127,7 +127,7 @@ export function Settings({ owner, repo, isPrivate: initialIsPrivate, hasDiscussi
               Discussions and Pull Requests are currently <span className="font-semibold">enabled</span> for this model. Members of the community can propose changes to this repository.
             </p>
           </div>
-          <Button variant="outline">Disable Discussions and PRs</Button>
+          <Button variant="outline">Disable</Button>
         </div>
       </section>
 
@@ -154,7 +154,7 @@ export function Settings({ owner, repo, isPrivate: initialIsPrivate, hasDiscussi
               Generate a Digital Object Identifier for this model. This action <span className="font-semibold">cannot</span> be undone. It will no longer be possible to delete, rename, transfer, or change the visibility to private.
             </p>
           </div>
-          <Button variant="outline">Generate DOI</Button>
+          <Button variant="outline">Generate</Button>
         </div>
       </section>
 

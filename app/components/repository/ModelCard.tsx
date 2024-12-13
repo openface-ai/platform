@@ -17,8 +17,7 @@ export function ModelCard({ item }: ModelCardProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const readmeKey = `${item.owner}/${item.name}`;
-    const readmeContent = mockReadme[readmeKey as keyof typeof mockReadme] || mockReadme.default;
+    const readmeContent= mockReadme.default;
 
     setTimeout(() => {
       setContent(readmeContent);
