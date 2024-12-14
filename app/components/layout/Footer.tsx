@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -11,30 +11,71 @@ export default function Footer() {
               A community-driven platform for sharing AI models and datasets.
             </p>
           </div>
-          
+
           <div>
             <h4 className="font-semibold mb-4">Resources</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="/docs" className="hover:text-green-500">Documentation</Link></li>
-              <li><Link href="/api" className="hover:text-green-500">API</Link></li>
-              <li><Link href="/blog" className="hover:text-green-500">Blog</Link></li>
+              <li>
+                <Link href="/docs" className="hover:text-green-500">
+                  Documentation
+                </Link>
+              </li>
+              <li>
+                <Link href="/api" className="hover:text-green-500">
+                  API
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-green-500">
+                  Blog
+                </Link>
+              </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold mb-4">Community</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="https://discord.gg/3swfECPMcr" className="hover:text-green-500">Discord</Link></li>
-              <li><Link href="https://github.com/openface-ai/" className="hover:text-green-500">GitHub</Link></li>
-              <li><Link href="https://twitter.com/openface_ai" className="hover:text-green-500">Twitter</Link></li>
+              <li>
+                <Link
+                  href="https://discord.gg/3swfECPMcr"
+                  className="hover:text-green-500"
+                >
+                  Discord
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://github.com/openface-ai/"
+                  className="hover:text-green-500"
+                >
+                  GitHub
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://x.com/openface_ai"
+                  className="hover:text-green-500"
+                >
+                  Twitter
+                </Link>
+              </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="/privacy" className="hover:text-green-500">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-green-500">Terms of Service</Link></li>
+              <li>
+                <Link href="/privacy" className="hover:text-green-500">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="hover:text-green-500">
+                  Terms of Service
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

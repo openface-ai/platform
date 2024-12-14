@@ -1,3 +1,27 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    // Disable typescript strict mode
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    
+    // Disable some React specific rules
+    "react/no-unescaped-entities": "off",
+    "react/display-name": "off",
+    "react/no-unknown-property": "off",
+    
+    // Disable strict mode rules
+    "strict": "off",
+    
+    // Make these warnings instead of errors
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    
+    // Disable require type checking
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    
+    // Disable props validation
+    "react/prop-types": "off"
+  }
 }

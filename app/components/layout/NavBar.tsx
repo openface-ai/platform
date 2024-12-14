@@ -1,21 +1,34 @@
 "use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { MenuIcon, XIcon } from 'lucide-react';
-import Button from '../ui/Button';
-import { useAuth } from '@/app/hooks/useAuth';
-import UserMenu from './UserMenu';
+import { useState } from "react";
+import Link from "next/link";
+import { MenuIcon, XIcon } from "lucide-react";
+import { useAuth } from "@/app/hooks/useAuth";
+import LoadingSpinner from "../ui/LoadingSpinner";
+import UserMenu from "./UserMenu";
+import Button from "../ui/Button";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
-  const { user, signOut } = useAuth();
+  const { user, isLoading, signOut, signIn } = useAuth();
 
-  const handleSignOut = () => {
-    signOut();
-    router.push('/');
+  const renderUserMenu = () => {
+    if (!isLoading && user) {
+      return (
+        <UserMenu
+          user={{ name: user.username, avatar: user.avatar }}
+          onSignOut={signOut}
+        />
+      );
+    } else if (!isLoading && !user) {
+      return (
+        <Button variant="primary" onClick={signIn}>
+          Login
+        </Button>
+      );
+    } else {
+      return <LoadingSpinner />;
+    }
   };
 
   return (
@@ -31,38 +44,25 @@ export default function NavBar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/models" className="hover:text-primary transition-colors">
+            <Link
+              href="/models"
+              className="hover:text-primary transition-colors"
+            >
               Models
             </Link>
-            <Link href="/datasets" className="hover:text-primary transition-colors">
+            <Link
+              href="/datasets"
+              className="hover:text-primary transition-colors"
+            >
               Datasets
             </Link>
-            <Link href="#community" className="hover:text-primary transition-colors">
+            <Link
+              href="#community"
+              className="hover:text-primary transition-colors"
+            >
               Community
             </Link>
-            
-            {user ? (
-              <>
-                <UserMenu user={user} onSignOut={handleSignOut} />
-              </>
-            ) : (
-              <>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => router.push('/signin')}
-                >
-                  Sign In
-                </Button>
-                <Button 
-                  variant="primary" 
-                  size="sm"
-                  onClick={() => router.push('/signup')}
-                >
-                  Sign Up
-                </Button>
-              </>
-            )}
+            {renderUserMenu()}
           </div>
 
           {/* Mobile menu button */}
@@ -80,9 +80,27 @@ export default function NavBar() {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {/* Add mobile menu items */}
+          <div className="md:hidden ">
+            <div className="px-2 pt-2 pb-3 space-y-1 flex flex-col items-end">
+              <Link
+                href="/models"
+                className="hover:text-primary transition-colors"
+              >
+                Models
+              </Link>
+              <Link
+                href="/datasets"
+                className="hover:text-primary transition-colors"
+              >
+                Datasets
+              </Link>
+              <Link
+                href="#community"
+                className="hover:text-primary transition-colors"
+              >
+                Community
+              </Link>
+              <div className="pt-2">{renderUserMenu()}</div>
             </div>
           </div>
         )}
