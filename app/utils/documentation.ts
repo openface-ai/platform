@@ -1,4 +1,4 @@
-export async function getDocumentationContent(fileName: string): Promise<{ content: string; data: any }> {
+export async function getDocumentationContent(fileName: string): Promise<{ content: string; data: string }> {
   const response = await fetch(`/api/docs/${fileName}`);
 
   if (!response.ok) {

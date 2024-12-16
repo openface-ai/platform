@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Layout from '@/app/components/layout/Layout';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import DocumentationSidebar from '@/app/components/documentation/DocumentationSidebar';
 import { getDocumentationContent } from '@/app/utils/documentation';
 import MarkdownRenderer from '@/app/components/shared/MarkdownRenderer';
@@ -22,7 +20,7 @@ const DocumentationPage = () => {
       try {
         const data = await getDocumentationContent(activeSection);
         setContent(data.content);
-      } catch (err: any) {
+      } catch (err) {
         setError(err.message);
         setContent('');
       } finally {

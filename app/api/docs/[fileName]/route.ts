@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-export async function GET(req: NextRequest, { params }: { params: { fileName: string } }) {
+export async function GET(req: NextRequest, { params }: { params: { fileName: any } }) {
   const { fileName } = await params;
 
   if (!fileName || typeof fileName !== 'string') {
