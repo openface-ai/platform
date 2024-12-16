@@ -4,7 +4,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 export async function GET(req: NextRequest, { params }: { params: { fileName: any } }) {
-  const { fileName } = await params;
+  const { fileName } = await params; 
 
   if (!fileName || typeof fileName !== 'string') {
     return NextResponse.json({ error: 'Invalid file name' }, { status: 400 });
