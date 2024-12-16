@@ -7,6 +7,7 @@ import { getDocumentationContent } from '@/app/utils/documentation';
 import MarkdownRenderer from '@/app/components/shared/MarkdownRenderer';
 import { Loader2 } from 'lucide-react';
 
+
 const DocumentationPage = () => {
   const [activeSection, setActiveSection] = useState<string>('overview');
   const [content, setContent] = useState<string>('');
@@ -20,7 +21,7 @@ const DocumentationPage = () => {
       try {
         const data = await getDocumentationContent(activeSection);
         setContent(data.content);
-      } catch (err) {
+      } catch (err: any) {
         setError(err.message);
         setContent('');
       } finally {
