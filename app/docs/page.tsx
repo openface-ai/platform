@@ -34,9 +34,7 @@ const DocumentationPage = () => {
 
   const sections = [
     { id: 'overview', title: 'Overview' },
-    { id: 'authentication-pages', title: 'Authentication Pages' },
-    { id: 'profile-pages', title: 'Profile Pages' },
-    { id: 'repository-pages', title: 'Repository Pages' },
+    { id: 'pages', title: 'Pages' },
     { id: 'search-interface', title: 'Search Interface' },
   ];
 
